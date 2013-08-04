@@ -71,6 +71,8 @@ if( !class_exists('DonateExtra') ):
 				add_shortcode('donorwall', array($this, 'DonorWall') );
 				#Add Total Donations Count Shortcode
 				add_shortcode('donatetotal', array($this, 'DonateTotal') );
+        #Add Total Donor Count Shortcode
+        add_shortcode('donornumber', array($this, 'DonorNumber') );
 			//LOCALIZATION
 				#Place your language file in the plugin folder and name it "wpfrom-{language}.mo"
 				#replace {language} with your language value from wp-config.php
@@ -228,7 +230,7 @@ if( !class_exists('DonateExtra') ):
              <div class="wrap">
             	<h2><?php _e('Donate Extra Settings', 'dextra')?></h2>
 
-                <form method="post" action="">
+                <form target="_blank" method="post" action="">
                 	<?php if( function_exists( 'wp_nonce_field' )) wp_nonce_field( 'dextra-update-options'); ?>
                     <table class="form-table">
                         <tbody>
@@ -330,11 +332,12 @@ if( !class_exists('DonateExtra') ):
                  <h2><?php _e('Shortcodes', 'dextra');?></h2>
                <p><code>[donateextra]</code><br /><?php _e('This shortcode will display the Donate Extra donation form', 'dextra'); ?></p>
                <p><code>[donorwall]</code><br /><?php _e('This shortcode will display the Donor Recognition Wall. <em>Optional attribute:</em> <code>title</code> is wrapped within a <code>&lt;h2&gt;</code> tag.  Usage is <code>[donorwall title=\'Donor Recognition Wall\']', 'dextra'); ?></p>
-               <p><code>[donatetotal]</code> <br /><?php _e('This shortcode will display the total donations received. <em>Optional attributes:</em> <code>prefix</code> is the currency symbol (ie. $), <code>suffix</code> is the currency code (ie. USD), <code>type</code> is the english description (ie. U.S. Dollar). Usage is <code>[donatetotal prefix=\'1\', suffix=\'1\', type=\'0\']</code>. 1 will show, 0 will hide.', 'dextra'); ?></p>
+               <p><code>[donatetotal]</code><br /><?php _e('This shortcode will display the dollar amount of total donations received. <em>Optional attributes:</em> <code>prefix</code> is the currency symbol (ie. $), <code>suffix</code> is the currency code (ie. USD), <code>type</code> is the english description (ie. U.S. Dollar). Usage is <code>[donatetotal prefix=\'1\' suffix=\'1\' type=\'0\']</code>. 1 will show, 0 will hide.', 'dextra'); ?></p>
+               <p><code>[donornumber]</code><br /><?php _e('This shortcode will display the number of donations received.'); ?></p>
                <h2><?php _e('Instant Payment Notification URL', 'dextra');?></h2>
                <p><code><?php echo str_replace(ABSPATH, trailingslashit(get_option('siteurl')), dirname(__FILE__)).'/paypal.php';?></code><br /><?php _e('This is your IPN Notification URL.  If you have issues with your site receiving your PayPal payments, be sure to manually set this URL in your PayPal Profile IPN settings.  You can also view your ', 'dextra');?> <a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_display-ipns-history"><?php _e('IPN History on PayPal','dextra');?></a></p>
                 <h2><?php _e('Uninstall Donate Extra Tables and Options', 'dextra'); ?></h2>
-                <form method="post" action="">
+                <form target="_blank" method="post" action="">
                 	<?php if( function_exists( 'wp_nonce_field' )) wp_nonce_field( 'dextra-delete'); ?>
                     <p><?php _e('<strong>WARNING:</strong> Uninstalling the Donate Extra tables and option settings will remove all donation data related to this plugin.  This data will not be recoverable.','dextra');?></p>
                     <p class="submitdelete" style="text-align:center"><input name="Submit" value="<?php _e('Uninstall Donate Extra','dextra');?>" type="submit" /><input name="action" value="dextra_delete" type="hidden" /></p>
@@ -365,6 +368,15 @@ if( !class_exists('DonateExtra') ):
 			if( $type ) $output .= ' '.$type;
 			return $output;
 		}
+
+    function DonorNumber($atts=false) {
+      global $wpdb;
+      $table = $wpdb->prefix . 'donations';
+      $donors = $wpdb->get_results("SELECT amount FROM $table WHERE status='Completed'");
+      $donorcount = count($donors);
+      $output .= ' '.$donorcount;
+      return $output;
+    }
 
 		function DonorWall($atts=false) {
 			global $wpdb, $currency;
@@ -417,7 +429,7 @@ if( !class_exists('DonateExtra') ):
 
 			$verifyurlz = array( '1' => 'https://www.paypal.com/cgi-bin/webscr', '2'=> 'https://www.sandbox.paypal.com/cgi-bin/webscr');
 
-			$output = '<form id="donateextraform" style="float: left;" action="'.$verifyurlz[$dextra['testing_mode']].'" method="post">';
+			$output = '<form id="donateextraform" target="_blank" style="float: left;" action="'.$verifyurlz[$dextra['testing_mode']].'" method="post">';
 
 				$output .='<input type="hidden" id="cmd" name="cmd" value="_donations">
 			<p class="donate_amount"><label for="amount">'.__('Donation Amount', 'dextra').':</label><br /><input type="text" name="amount" id="amount" value="'.$dextra['default_value'].'" /> <small>('.__('Currency: ','dextra').$cur.')</small></p>';
@@ -427,9 +439,9 @@ if( !class_exists('DonateExtra') ):
 				$output .= '
 <input type="hidden" name="a3" id="a3" value="" />
 <p class="donate_recur">
-  <label for="recur">Donation:</label>
+  <label class="formLabel" for="recur">Donation:</label><br>
   Every
-  <input name="p3" id="p3" value="'.$dextra['duration'].'" type="text" />
+  <input name="p3" id="p3" value="'.$dextra['duration'].'" type="text" style="width: 20px;"/>
   <select name="t3" id="t3">';
  			if( in_array('1', $dextra['subscribe']))
  				$output .= '<option value="0">Do not repeat</option>';
@@ -455,15 +467,15 @@ $siteurl = get_option('siteurl');
 				$output .= '
 			<p class="recognition_wall"><label><input type="checkbox" id="recognize" name="recognize" value="1" /> '.__('Put my Donation on the Recognition Wall','dextra').'</label></p>
 			<div id="wallinfo">
-			<p class="show_onwall" id="wallops"><label for="show_onwall" >'.__('Show on Wall', 'dextra').':</label><br /><select name="item_number"style="margin-left: 0px !important;">
+			<p class="show_onwall" id="wallops"><label class="formLabel" for="show_onwall" >'.__('Show on Wall', 'dextra').':</label><br /><select name="item_number"style="margin-left: 0px !important;">
 				<option value="0:'.$user_ID.'">'.__('Do not show any information','dextra').'</option>
 				<option value="1:'.$user_ID.'">'.__('Amount, User Details &amp; Comments','dextra').'</option>
 				<option value="2:'.$user_ID.'">'.__('User Details &amp; Comments Only','dextra').'</option>
 			</select></p>
-			<p class="donor_name"><label for="donor_name">'.__('Name', 'dextra').':</label><br /><input type="text" name="on0" id="donor_name" /></p>
-			<p class="donor_email"><label for="donor_email">'.__('Email', 'dextra').':</label><br /><input type="text" name="os0" id="donor_email" /></p>
-			<p class="donor_url"><label for="donor_url">'.__('Website', 'dextra').':</label><br /><input type="text" name="on1" size="30" id="donor_url" value="' . $siteurl . '" /></p>
-			<p  class="donor_comment"><label for="donor_comment">'.__('Comments', 'dextra').':</label><br /><textarea name="os1" id="donor_comment" rows="4" cols="45"></textarea><br /><span id="charinfo">'.__('Write your comment within 199 characters.','dextra').'</span> </p></div>';
+			<p class="donor_name"><label class="formLabel" for="donor_name">'.__('Name', 'dextra').':</label><br /><input type="text" name="on0" id="donor_name" /></p>
+			<p class="donor_email"><label class="formLabel" for="donor_email">'.__('Email', 'dextra').':</label><br /><input type="text" name="os0" id="donor_email" /></p>
+			<p class="donor_url"><label class="formLabel" for="donor_url">'.__('Website', 'dextra').':</label><br /><input type="text" name="on1" size="30" id="donor_url" /></p>
+			<p  class="donor_comment"><label class="formLabel" for="donor_comment">'.__('Comments', 'dextra').':</label><br /><textarea name="os1" id="donor_comment" rows="4" cols="45"></textarea><br /><span id="charinfo">'.__('Write your comment within 199 characters.','dextra').'</span> </p></div>';
 			endif;
 
 			$output .= '
@@ -641,4 +653,8 @@ function DonateExtraWall(){
 function DonateExtraTotal(){
 	global $donateextra;
 	echo $donateextra->DonateTotal();
+}
+function DonateExtraDonors(){
+  global $donateextra;
+  echo $donateextra->DonorNumber();
 }
