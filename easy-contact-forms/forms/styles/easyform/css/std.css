@@ -13,35 +13,51 @@ div.ufo-form .ufo-customfields-invalid{background-image: url(../images/failure2.
 
 div.ufo-form  span.ufo-cell-left,
 div.ufo-form  span.ufo-cell-right, 
-div.ufo-form  span.ufo-cell-center{
+div.ufo-form  span.ufo-cell-center,
+div.ufo-form  div.ufo-cell-left,
+div.ufo-form  div.ufo-cell-right, 
+div.ufo-form  div.ufo-cell-center{
 	display:inline-block;
 }
 
 div.ufo-form span.ufo-cell-left label, 
 div.ufo-form span.ufo-cell-right label, 
-div.ufo-form span.ufo-cell-center label
+div.ufo-form span.ufo-cell-center label,
+div.ufo-form div.ufo-cell-left label, 
+div.ufo-form div.ufo-cell-right label, 
+div.ufo-form div.ufo-cell-center label
 {
 	display:block;
 	margin:3px 0;
 }
 
 div.ufo-form span.ufo-cell-left label {margin-right:5px;}
+div.ufo-form div.ufo-cell-left label {margin-right:5px;}
 div.ufo-form span.ufo-cell-right label {margin-left:5px;}
+div.ufo-form div.ufo-cell-right label {margin-left:5px;}
 
 div.ufo-form span.ufo-cell-right {width:0;padding-left:0;}
+div.ufo-form div.ufo-cell-right {width:0;padding-left:0;}
 div.ufo-form span.ufo-cell-left {width:130px;}
+div.ufo-form div.ufo-cell-left {width:130px;}
 div.ufo-form span.ufo-cell-center {width:230px}
+div.ufo-form div.ufo-cell-center {width:230px}
 
 div.ufo-form span.ufo-cell-center input, 
 div.ufo-form span.ufo-cell-center textarea, 
-div.ufo-form span.ufo-cell-center select 
+div.ufo-form span.ufo-cell-center select, 
+div.ufo-form div.ufo-cell-center input, 
+div.ufo-form div.ufo-cell-center textarea, 
+div.ufo-form div.ufo-cell-center select 
 {width:100%}
 
 div.ufo-form div.ufo-customform-row {padding:1px 0;}
 div.ufo-form div.ufo-customform-row * {vertical-align:middle;}
 
 div.ufo-form div.ufo-fieldtype-23 span.ufo-cell-center {width:auto;}
+div.ufo-form div.ufo-fieldtype-14 {display:none}
 
+div.ufo-form div.ufo-customform-row.ufo-fieldtype-25 *,
 div.ufo-form div.ufo-customform-row.ufo-fieldtype-23 *,
 div.ufo-form div.ufo-customform-row.ufo-fieldtype-20 *,
 div.ufo-form div.ufo-customform-row.ufo-fieldtype-19 *,
@@ -54,6 +70,8 @@ div.ufo-form div.ufo-customform-row.ufo-fieldtype-8 *
 div.ufo-form div.ufo-customform-row input[type="radio"] {margin-top:6px !important}
 
 div.ufo-form .ufo-field-default-value {color:#333;}
+div.ufo-form div.ufo-fieldtype-10 div.ufo-cell-center {width:auto},
+
 
 div.ufo-form .ufo-customfields-field-description {font-size:0.9em;}
 

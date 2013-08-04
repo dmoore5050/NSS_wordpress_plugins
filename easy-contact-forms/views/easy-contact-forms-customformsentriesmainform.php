@@ -58,7 +58,7 @@ EasyContactFormsLayout::getFormHeader2Body();
         </div>
       </div>
       <div id='CustomFormEntryFiles' class='ufo-tabs ufo-tab'>
-        <input type='hidden' value='AppMan.initRedirect("CustomFormEntryFiles", {specialfilter:"[{\"property\":\"CustomFormsEntries\", \"value\":{\"values\":[<?php echo $obj->get('id');?>]}}]", viewTarget:"CustomFormEntryFilesDiv", t:"CustomFormEntryFiles", m:"viewDetailed"}, [{property:"CustomFormsEntries", value:{values:[<?php echo $obj->get('id');?>]}}])' class='ufo-eval'>
+        <input type='hidden' value='AppMan.initRedirect("CustomFormEntryFiles", {specialfilter:"[{\"property\":\"CustomFormsEntries\", \"value\":{\"values\":[<?php echo $obj->get('id');?>]}}]", viewTarget:"CustomFormEntryFilesDiv", t:"CustomFormEntryFiles", m:"viewDetailed"}, [{property:"CustomFormsEntries", value:{values:[<?php echo $obj->get('id');?>]}}])' class='ufo-eval'/>
         <div id='CustomFormEntryFilesDiv' class='innerview'></div>
       </div>
     </div>

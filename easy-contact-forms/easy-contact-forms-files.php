@@ -607,12 +607,12 @@ class EasyContactFormsFiles extends EasyContactFormsBase {
 		$filename = $_FILES[$filerequestid]['name'];
 		$tmpname	= $_FILES[$filerequestid]['tmp_name'];
 		$filesize = $_FILES[$filerequestid]['size'];
-		$filetype = EasyContactFormsUtils::addMSlashes($_FILES[$filerequestid]['type']);
+		$filetype = mysql_real_escape_string($_FILES[$filerequestid]['type']);
 
 		$id = intval($_uldmap['oid']);
-		$Type = EasyContactFormsUtils::addMSlashes($_uldmap['t']);
-		$fieldname = EasyContactFormsUtils::addMSlashes($_uldmap['fld']);
-		$filename = EasyContactFormsUtils::addMSlashes($filename);
+		$Type = mysql_real_escape_string($_uldmap['t']);
+		$fieldname = mysql_real_escape_string($_uldmap['fld']);
+		$filename = mysql_real_escape_string($filename);
 
 		$ds = DIRECTORY_SEPARATOR;
 

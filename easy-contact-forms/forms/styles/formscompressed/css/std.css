@@ -6,6 +6,9 @@ div.ufo-form div {
 	margin-bottom:0 !important;
 }
 
+div.ufo-form div.ufo-cell-left,
+div.ufo-form div.ufo-cell-right, 
+div.ufo-form div.ufo-cell-center,
 div.ufo-form span.ufo-cell-left,
 div.ufo-form span.ufo-cell-right, 
 div.ufo-form span.ufo-cell-center{
@@ -14,6 +17,9 @@ div.ufo-form span.ufo-cell-center{
 	padding:0 !important;
 }
 
+div.ufo-form div.ufo-cell-left label, 
+div.ufo-form div.ufo-cell-right label, 
+div.ufo-form div.ufo-cell-center label,
 div.ufo-form span.ufo-cell-left label, 
 div.ufo-form span.ufo-cell-right label, 
 div.ufo-form span.ufo-cell-center label
@@ -26,10 +32,20 @@ div.ufo-form span.ufo-cell-left label {margin:2px 5px 2px 0 !important;}
 div.ufo-form span.ufo-cell-right label {margin:2px 0px 2px 5px !important;}
 div.ufo-form span.ufo-cell-center label {margin:2px 0px !important;}
 
+div.ufo-form div.ufo-cell-left label {margin:2px 5px 2px 0 !important;}
+div.ufo-form div.ufo-cell-right label {margin:2px 0px 2px 5px !important;}
+div.ufo-form div.ufo-cell-center label {margin:2px 0px !important;}
+
 div.ufo-form span.ufo-cell-right {width:130px;padding-left:3px;}
 div.ufo-form span.ufo-cell-left{width:130px;}
 div.ufo-form span.ufo-cell-center{width:230px}
 
+div.ufo-form div.ufo-cell-right {width:130px;padding-left:3px;}
+div.ufo-form div.ufo-cell-left{width:130px;}
+div.ufo-form div.ufo-cell-center{width:230px}
+
+div.ufo-form div.ufo-cell-center input, 
+div.ufo-form div.ufo-cell-center select, 
 div.ufo-form span.ufo-cell-center input, 
 div.ufo-form span.ufo-cell-center select 
 {width:100%}
@@ -38,6 +54,7 @@ div.ufo-customform-row {padding:2px !important;}
 
 div.ufo-customform-row * {vertical-align:middle;}
 
+div.ufo-customform-row.ufo-fieldtype-25 *,
 div.ufo-customform-row.ufo-fieldtype-20 *,
 div.ufo-customform-row.ufo-fieldtype-19 *,
 div.ufo-customform-row.ufo-fieldtype-10 *,
@@ -45,6 +62,9 @@ div.ufo-customform-row.ufo-fieldtype-12 *,
 div.ufo-customform-row.ufo-fieldtype-13 *,
 div.ufo-customform-row.ufo-fieldtype-8 *
 {vertical-align:top !important;}
+
+div.ufo-form div.ufo-fieldtype-14 {display:none}
+div.ufo-form div.ufo-fieldtype-10 div.ufo-cell-center {width:auto},
 
 div.ufo-customform-row input[type="radio"] {margin-top:6px !important}
 

@@ -32,8 +32,8 @@ EasyContactFormsLayout::getFormHeader2Body();
                  <?php echo EasyContactFormsT::get('LastName');?>
                  <span class='mandatoryast'>*</span>
               </label>
-              <input type='text' id='Description' value='<?php echo $obj->get('Description');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-              <input type='hidden' value='var c = {};c.id = "Description";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("200");c.max="200";c.events.blur.push("minmax");c.required={};c.required.msg=AppMan.resources.ThisFieldIsRequired;c.events.blur.push("required");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+              <input type='text' id='Description' value='<?php echo $obj->get('Description');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+              <input type='hidden' value='var c = {};c.id = "Description";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("200");c.max="200";c.events.blur.push("minmax");c.required={};c.required.msg=AppMan.resources.ThisFieldIsRequired;c.events.blur.push("required");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
               <div id='Description-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
             </div>
             <div>
@@ -52,8 +52,8 @@ EasyContactFormsLayout::getFormHeader2Body();
           <div class='ufo-float-right ufo-width50'>
             <div>
               <label for='Name'><?php echo EasyContactFormsT::get('FirstName');?></label>
-              <input type='text' id='Name' value='<?php echo $obj->get('Name');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-              <input type='hidden' value='var c = {};c.id = "Name";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+              <input type='text' id='Name' value='<?php echo $obj->get('Name');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+              <input type='hidden' value='var c = {};c.id = "Name";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
               <div id='Name-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
             </div>
             <div>
@@ -78,33 +78,33 @@ EasyContactFormsLayout::getFormHeader2Body();
           <div>
             <label for='Birthday'><?php echo EasyContactFormsT::get('Birthday');?></label>
             <div class='ufo-input-wrapper'>
-              <input type='text' id='Birthday' value='<?php echo $obj->Birthday;?>' READONLY class='ufo-date datebox ufo-internal ufo-formvalue'>
+              <input type='text' id='Birthday' value='<?php echo $obj->Birthday;?>' READONLY class='ufo-date datebox ufo-internal ufo-formvalue'/>
               <a id='Birthday-Trigger' href='javascript:;' class='ufo-triggerbutton icon_trigger_calendar'>&nbsp;&nbsp;</a>
             </div>
-            <input type='hidden' value='ufo.setupCalendar("Birthday", {ifFormat:"<?php echo EasyContactFormsApplicationSettings::getInstance()->getDateFormat('JS'); ?>", firstDay:0, align:"Bl", singleClick:true});' class='ufo-eval'>
+            <input type='hidden' value='ufo.setupCalendar("Birthday", {ifFormat:"<?php echo EasyContactFormsApplicationSettings::getInstance()->getDateFormat('JS'); ?>", firstDay:0, align:"Bl", singleClick:true});' class='ufo-eval'/>
           </div>
           <div>
             <label for='Country'><?php echo EasyContactFormsT::get('Country');?></label>
-            <input type='text' id='Country' value='<?php echo $obj->get('Country');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "Country";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("300");c.max="300";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='Country' value='<?php echo $obj->get('Country');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "Country";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("300");c.max="300";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='Country-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='City'><?php echo EasyContactFormsT::get('City');?></label>
-            <input type='text' id='City' value='<?php echo $obj->get('City');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "City";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("300");c.max="300";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='City' value='<?php echo $obj->get('City');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "City";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("300");c.max="300";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='City-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='State'><?php echo EasyContactFormsT::get('State');?></label>
-            <input type='text' id='State' value='<?php echo $obj->get('State');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "State";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("300");c.max="300";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='State' value='<?php echo $obj->get('State');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "State";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("300");c.max="300";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='State-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='Zip'><?php echo EasyContactFormsT::get('Zip');?></label>
-            <input type='text' id='Zip' value='<?php echo $obj->get('Zip');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "Zip";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("20");c.max="20";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='Zip' value='<?php echo $obj->get('Zip');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "Zip";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("20");c.max="20";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='Zip-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
@@ -115,50 +115,50 @@ EasyContactFormsLayout::getFormHeader2Body();
         <div class='ufo-float-right ufo-width50'>
           <div>
             <label for='email'><?php echo EasyContactFormsT::get('email');?></label>
-            <input type='text' id='email' value='<?php echo $obj->get('email');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "email";c.events = {};c.events.blur = [];c.email={};c.email.msg=AppMan.resources.EmailFormatIsExpected;c.events.blur.push("email");c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='email' value='<?php echo $obj->get('email');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "email";c.events = {};c.events.blur = [];c.email={};c.email.msg=AppMan.resources.EmailFormatIsExpected;c.events.blur.push("email");c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='email-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='email2'><?php echo EasyContactFormsT::get('email2');?></label>
-            <input type='text' id='email2' value='<?php echo $obj->get('email2');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "email2";c.events = {};c.events.blur = [];c.email={};c.email.msg=AppMan.resources.EmailFormatIsExpected;c.events.blur.push("email");c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='email2' value='<?php echo $obj->get('email2');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "email2";c.events = {};c.events.blur = [];c.email={};c.email.msg=AppMan.resources.EmailFormatIsExpected;c.events.blur.push("email");c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='email2-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='Cell'><?php echo EasyContactFormsT::get('Cell');?></label>
-            <input type='text' id='Cell' value='<?php echo $obj->get('Cell');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "Cell";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='Cell' value='<?php echo $obj->get('Cell');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "Cell";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='Cell-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='Phone1'><?php echo EasyContactFormsT::get('Phone1');?></label>
-            <input type='text' id='Phone1' value='<?php echo $obj->get('Phone1');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "Phone1";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='Phone1' value='<?php echo $obj->get('Phone1');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "Phone1";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='Phone1-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='Phone2'><?php echo EasyContactFormsT::get('Phone2');?></label>
-            <input type='text' id='Phone2' value='<?php echo $obj->get('Phone2');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "Phone2";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='Phone2' value='<?php echo $obj->get('Phone2');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "Phone2";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='Phone2-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='Phone3'><?php echo EasyContactFormsT::get('Phone3');?></label>
-            <input type='text' id='Phone3' value='<?php echo $obj->get('Phone3');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "Phone3";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='Phone3' value='<?php echo $obj->get('Phone3');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "Phone3";c.events = {};c.events.blur = [];c.phonenumber={};c.phonenumber.msg=AppMan.resources.ThisIsAPhoneNumber;c.events.blur.push("phonenumber");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='Phone3-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='SkypeId'><?php echo EasyContactFormsT::get('SkypeId');?></label>
-            <input type='text' id='SkypeId' value='<?php echo $obj->get('SkypeId');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "SkypeId";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='SkypeId' value='<?php echo $obj->get('SkypeId');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "SkypeId";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("100");c.max="100";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='SkypeId-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
           <div>
             <label for='Website'><?php echo EasyContactFormsT::get('Website');?></label>
-            <input type='text' id='Website' value='<?php echo $obj->get('Website');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'>
-            <input type='hidden' value='var c = {};c.id = "Website";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("200");c.max="200";c.events.blur.push("minmax");c.invClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'>
+            <input type='text' id='Website' value='<?php echo $obj->get('Website');?>' class='textinput ufo-text ufo-formvalue' style='width:100%'/>
+            <input type='hidden' value='var c = {};c.id = "Website";c.events = {};c.events.blur = [];c.minmax={};c.minmax.msg=AppMan.resources.ValueLengthShouldBeLessThan;c.minmax.args=[];c.minmax.args.push("200");c.max="200";c.events.blur.push("minmax");c.InvalidCSSClass = "ufo-fields-invalid-field";AppMan.addValidation(c);' class='ufo-eval'/>
             <div id='Website-invalid' class='ufo-fields-invalid-value ufo-id-link' style='position:absolute;display:none'></div>
           </div>
         </div>
@@ -198,9 +198,9 @@ EasyContactFormsLayout::getFormHeader2Body();
         </div>
       </div>
       <div id='CustomFormMailingLists' class='ufo-tabs ufo-tab'>
-        <input type='hidden' value='AppMan.initRedirect("CustomFormMailingLists", {viewTarget:"CustomFormsDiv", t:"CustomForms", m:"mtmview", n:"manage", a:"{\"m\":\"mtmview\", \"ca\":[{\"mt\":\"CustomForms_MailingLists\", \"oid\":\"<?php echo $obj->get('id');?>\", \"fld\":\"Contacts\", \"t\":\"Users\", \"n\":\"CustomForms\"}]}"})' class='ufo-eval'>
+        <input type='hidden' value='AppMan.initRedirect("CustomFormMailingLists", {viewTarget:"CustomFormsDiv", t:"CustomForms", m:"mtmview", n:"manage", a:"{\"m\":\"mtmview\", \"ca\":[{\"mt\":\"CustomForms_MailingLists\", \"oid\":\"<?php echo $obj->get('id');?>\", \"fld\":\"Contacts\", \"t\":\"Users\", \"n\":\"CustomForms\"}]}"})' class='ufo-eval'/>
         <div id='CustomFormsDiv' class='mtmview innerview' style='width:270px;float:right'></div>
-        <input type='hidden' value='AppMan.initRedirect("CustomFormMailingLists", {specialfilter:"[{\"property\":\"Contacts\", \"value\":{\"values\":[<?php echo $obj->get('id');?>]}}]", viewTarget:"CustomForms_MailingListsDiv", t:"CustomForms_MailingLists", m:"mtmview", n:"Users"}, [{property:"Contacts", value:{values:[<?php echo $obj->get('id');?>]}}])' class='ufo-eval'>
+        <input type='hidden' value='AppMan.initRedirect("CustomFormMailingLists", {specialfilter:"[{\"property\":\"Contacts\", \"value\":{\"values\":[<?php echo $obj->get('id');?>]}}]", viewTarget:"CustomForms_MailingListsDiv", t:"CustomForms_MailingLists", m:"mtmview", n:"Users"}, [{property:"Contacts", value:{values:[<?php echo $obj->get('id');?>]}}])' class='ufo-eval'/>
         <div id='CustomForms_MailingListsDiv' class='mtmview innerview' style='margin-right:275px'></div>
       </div>
     </div>
@@ -216,7 +216,7 @@ EasyContactFormsLayout::getFormHeader2Body();
           'bclass' => "button internalimage",
         )
       );?>
-      <input type='hidden' value='var c = {};c.id = "OK";AppMan.addSubmit(c);' class='ufo-eval'>
+      <input type='hidden' value='var c = {};c.id = "OK";AppMan.addSubmit(c);' class='ufo-eval'/>
     </div>
     <div class='ufo-float-left'>
       <?php echo EasyContactFormsIHTML::getButton(
@@ -228,7 +228,7 @@ EasyContactFormsLayout::getFormHeader2Body();
           'bclass' => "button internalimage",
         )
       );?>
-      <input type='hidden' value='var c = {};c.id = "Apply";AppMan.addSubmit(c);' class='ufo-eval'>
+      <input type='hidden' value='var c = {};c.id = "Apply";AppMan.addSubmit(c);' class='ufo-eval'/>
     </div>
     <div class='ufo-float-left'>
       <?php echo EasyContactFormsIHTML::getButton(

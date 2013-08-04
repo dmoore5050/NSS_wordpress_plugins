@@ -532,7 +532,7 @@ class EasyContactFormsCustomFormFields extends EasyContactFormsBase {
 		$toolbar .= '</div>';
 		$list = $toolbar . $list;
 
-		$list = '<link href="' . EASYCONTACTFORMS__engineWebAppDirectory . '/forms/fldcons/fldcons.1.4.2.css" rel="stylesheet" type="text/css"/>'  . $list ;
+		$list = '<link href="' . EASYCONTACTFORMS__engineWebAppDirectory . '/forms/fldcons/fldcons.1.4.5.css" rel="stylesheet" type="text/css"/>'  . $list ;
 
 		echo $list;
 
@@ -577,7 +577,7 @@ class EasyContactFormsCustomFormFields extends EasyContactFormsBase {
 		foreach ($sort as $item) {
 			$option = $sort2[$item];
 			if ($type == 'select') {
-				$selected = $option->attributes()->default == 'true' ? ' selected' : '';
+				$selected = $option->attributes()->default == 'true' ? ' selected=\'selected\'' : '';
 				echo "<option value='$option'$selected>$option</option>";
 			}
 			if ($type == 'radiogroup') {
@@ -589,7 +589,7 @@ class EasyContactFormsCustomFormFields extends EasyContactFormsBase {
 				echo "<input style='width:16px;display:inline-block' type='radio'{$checked} id='id-{$id}-{$counter}'";
 				echo " name='id-{$id}' value='$option'";
 
-				echo " onclick='ufoForms.get(\"ufo-field-id-{$id}\").value=this.value;var c=ufoForms.els[\"ufo-field-id-{$id}\"];if(c){c.isvalid=true;ufoForms.changeView(true, c);ufoForms.validateForm(c.form);}'>";
+				echo " onclick='ufoForms.get(\"ufo-field-id-{$id}\").value=this.value;var c=ufoForms.els[\"ufo-field-id-{$id}\"];if(c){c.isvalid=true;ufoForms.changeView(true, c);ufoForms.validateForm(c.form);}'/>";
 
 				echo "<label style='display:inline-block' for='id-{$id}-{$counter}'>$option</label>";
 				echo "</div>";
@@ -618,9 +618,9 @@ class EasyContactFormsCustomFormFields extends EasyContactFormsBase {
 		$type = EasyContactFormsClassLoader::getObject('CustomFormFieldTypes', true, $field->get('Type'));
 
 		echo "<div class='buttons'>";
-		echo '<input type="hidden" class="ufo-form-value" id="oid" value="' . $id . '">';
+		echo '<input type="hidden" class="ufo-form-value" id="oid" value="' . $id . '"/>';
 
-		echo "<input type='hidden' value='var c = {};c.id = \"customformfields-btn\";AppMan.addSubmit(c);' class='ufo-eval'>";
+		echo "<input type='hidden' value='var c = {};c.id = \"customformfields-btn\";AppMan.addSubmit(c);' class='ufo-eval'/>";
 
 		$field->getSettingsFormButton('customformfields-btn', EasyContactFormsT::get('Apply'), "onclick='ufoCf.updateFieldData(this)'", 'icon_button_save small-submit-button');
 
@@ -720,8 +720,8 @@ class EasyContactFormsCustomFormFields extends EasyContactFormsBase {
     <?php foreach ($sort as $item) { ?>
     <?php $option = $sort2[$item]; ?>
       <li class='ufo-customform-fieldform-option-li <?php echo count($sort) == 1 ? 'ufo-fieldform-option-single-child' : '';?>'>
-        <input type='radio' id='ufo-fieldform-option-default-<?php echo $index;?>' value='<?php echo $option->attributes()->default == 'true' ? 'on' : ''; ?>' name='ufo-fieldform-option-default' title='<?php echo EasyContactFormsT::get('CF_Default');?>' tabindex='-1' <?php echo $option->attributes()->default == 'true' ? 'checked' : ''; ?> class='ufo-formvalue ufo-customform-option-default' onchange='ufoCf.unsetOptionValues();this.value=(this.checked)?"on":"off";'>
-        <input type='text' id='ufo-fieldform-option-li-<?php echo $index;?>' value='<?php echo $option;?>' class='ufo-formvalue textinput ufo-text ufo-fieldform-option-li'>
+        <input type='radio' id='ufo-fieldform-option-default-<?php echo $index;?>' value='<?php echo $option->attributes()->default == 'true' ? 'on' : ''; ?>' name='ufo-fieldform-option-default' title='<?php echo EasyContactFormsT::get('CF_Default');?>' tabindex='-1' <?php echo $option->attributes()->default == 'true' ? 'checked' : ''; ?> class='ufo-formvalue ufo-customform-option-default' onchange='ufoCf.unsetOptionValues();this.value=(this.checked)?"on":"off";'/>
+        <input type='text' id='ufo-fieldform-option-li-<?php echo $index;?>' value='<?php echo $option;?>' class='ufo-formvalue textinput ufo-text ufo-fieldform-option-li'/>
         <a id='ufo-fieldform-option-add-<?php echo $index;?>' title='<?php echo EasyContactFormsT::get('Add');?>' href='javascript:;' class='icon_button_add ufo-customform-option-add ufo-id-link' onclick='ufoCf.addOption(this.id);'></a>
         <a id='ufo-fieldform-option-delete-<?php echo (++$index);?>' title='<?php echo EasyContactFormsT::get('Delete');?>' class='icon_button_delete ufo-customform-option-delete ufo-id-link' onclick='ufoCf.deleteOption(this);'></a>
       </li>

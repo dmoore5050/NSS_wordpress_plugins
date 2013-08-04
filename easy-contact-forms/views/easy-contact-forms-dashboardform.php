@@ -70,17 +70,17 @@ EasyContactFormsLayout::getFormHeader2Body();
             <div>
               <div style='height:130px;overflow:auto;font-size:11px'>
                  <div style='font-weight:bold'>
-                   Current version: 1.4.2
+                   Current version: 1.4.5
                  </div>
                  <ol style='padding:1px'>
                    <li style='margin:0;padding:1px'>
-                     A new Show On Dashboard form property is added. 
+                     Additional option allowing to fix a front end contact form Status = 0 problem is added. 
                    </li>
                    <li style='margin:0;padding:1px'>
-                     A new, page based, conversion report is added.
+                     Front end contact form W3C compliancy support is added
                    </li>
                    <li style='margin:0;padding:1px'>
-                     Wordpress 3.5 related issues are fixed, several front-end side fixes. 
+                     Several minor contact form settings GUI bugs fixed
                    </li>
                  </ol>
               </div>

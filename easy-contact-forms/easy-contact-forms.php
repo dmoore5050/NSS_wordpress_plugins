@@ -2,7 +2,7 @@
 /*
 Plugin Name: Easy Contact Forms
 Plugin URI: http://easy-contact-forms.com 
-Version: 1.4.2
+Version: 1.4.5
 Author: ChampionForms.com
 Author URI: http://championforms.com
 Description: Easy Contact Forms. Easy to create. Easy to fill out. Easy to change. Easy to manage. Easy to protect	
@@ -38,13 +38,14 @@ if ( isset($easycontactforms) && function_exists('register_activation_hook') ){
 	add_action( 'wp_ajax_nopriv_easy-contact-forms-submit', 'easycontactforms_entrypoint' );
 	add_action( 'wp_ajax_easy-contact-forms-submit', 'easycontactforms_entrypoint' );	
 	add_shortcode( 'easy_contact_forms_frontend', 'easycontactforms_entrypoint_shortcode' );
-	add_shortcode( 'easy_contact_forms', 'easycontactforms_formentrypoint' );	
+	add_shortcode( 'easy_contact_forms', 'easycontactforms_formentrypoint' );
+	add_action('wp_head', 'easycontact_w3c_load_styles');	
 	add_action( 'plugins_loaded', 'easycontactforms_update_db_check');
 
 } 
-
 function easycontactforms_update_db_check() {
-	$db_version = '1.4.2';
+
+	$db_version = '1.4.5';
 	require_once 'easy-contact-forms-root.php'; 		
 	require_once 'easy-contact-forms-applicationsettings.php'; 		
 	$as = EasyContactFormsApplicationSettings::getInstance();
@@ -54,12 +55,24 @@ function easycontactforms_update_db_check() {
 }
 
 function easycontactforms_main_page() {
-	if ( function_exists('add_submenu_page') )
-		add_submenu_page('plugins.php', __('Easy Contact Forms'), __('Easy Contact Forms'), 'manage_options', 'easy-contact-forms-main-page', 'easycontactforms_entrypoint');
+		add_menu_page( 'Easy Contact Forms', 'Contact Forms', 'manage_options', 'easy-contact-forms-main-page', 'easycontactforms_entrypoint'); 
+		add_submenu_page('easy-contact-forms-main-page', __('Easy Contact Forms Support'), __('Support'), 'manage_options', 'easy-contact-forms-support',  'easycontactforms_get_support_page');
+ 
+}
+
+function easycontactforms_get_support_page() {
+ 
+	require_once 'easy-contact-forms-support.php';
+	require_once 'easy-contact-forms-utils.php';
+	$support = new EasyContactFormsSupport();
+	$support->getSupportPage();
+ 
 }
 
 function easycontactforms_tag() {
+ 
 	easycontactforms_entrypoint();
+ 
 }
 	
 
@@ -79,6 +92,45 @@ function easycontactforms_phpmailer_init($phpmailer) {
 }
 
 add_action('phpmailer_init','easycontactforms_phpmailer_init');
+
+/**
+ * 	easycontact_w3c_load_styles
+ *
+ *
+ * @return
+ * 
+ */
+
+function easycontact_w3c_load_styles() {
+
+	if (is_admin()) {
+		return;
+	}
+
+	require_once 'easy-contact-forms-root.php';
+	require_once 'easy-contact-forms-applicationsettings.php';
+	$as = EasyContactFormsApplicationSettings::getInstance();
+	if ($as->get('w3cCompliant') && !$as->isEmpty('w3cStyle')) {
+		$base = get_bloginfo('wpurl');
+		$base = rtrim($base, '/');
+		if (!defined ('EASYCONTACTFORMS__APPLICATION_ROOT'))
+			DEFINE('EASYCONTACTFORMS__APPLICATION_ROOT', $base);
+		if (!defined ('WP_DS'))
+			DEFINE('WP_DS', DIRECTORY_SEPARATOR);
+		if (!defined ('_EASYCONTACTFORMS_DIR'))
+			DEFINE('_EASYCONTACTFORMS_DIR', 'wp-content/plugins/easy-contact-forms');
+		if (!defined ('EASYCONTACTFORMS__engineWebAppDirectory'))
+
+			DEFINE('EASYCONTACTFORMS__engineWebAppDirectory', rtrim(EASYCONTACTFORMS__APPLICATION_ROOT, '/') . '/' . _EASYCONTACTFORMS_DIR);
+
+		if (!defined ('_EASYCONTACTFORMS_PLUGIN_PATH'))
+			DEFINE('_EASYCONTACTFORMS_PLUGIN_PATH', ABSPATH . _EASYCONTACTFORMS_DIR);
+		require_once _EASYCONTACTFORMS_PLUGIN_PATH . WP_DS . 'easy-contact-forms-appconfigdata.php';
+		$forms = EasyContactFormsClassLoader::getObject('CustomForms');
+		echo $forms->basicLoadStyle($as->get('w3cStyle'));
+	}
+
+}
 
 /**
  * 	Easy Contact Forms entrypoint
@@ -160,20 +212,21 @@ function easycontactforms_entrypoint() {
 	wp_enqueue_script('jquery-ui-mouse');
 	wp_enqueue_script('jquery-ui-sortable');
 
-	wp_enqueue_style('easy-contact-forms-admin-ui-css','http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css',false,'1.4.2',false);
+	wp_enqueue_style('easy-contact-forms-admin-ui-css','http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css',false,'1.4.5',false);
 
 	wp_enqueue_script('jquery-ui-draggable');
 	wp_enqueue_script('jquery-ui-position');
 	wp_enqueue_script('jquery-ui-resizable');
 	wp_enqueue_script('jquery-ui-dialog');
 
-	wp_enqueue_script('easy-contact-formshtml.1.4.2', '/' . _EASYCONTACTFORMS_DIR . '/easy-contact-formshtml.1.4.2.js');
-	wp_enqueue_script('scrollto', '/' . _EASYCONTACTFORMS_DIR . '/js/jqui/scrollto.js');
-	wp_enqueue_script('as', '/' . _EASYCONTACTFORMS_DIR . '/js/as.js');
-	wp_enqueue_script('ajaxupload', '/' . _EASYCONTACTFORMS_DIR . '/js/ajaxupload.js');
-	wp_enqueue_script('calendar_stripped', '/' . _EASYCONTACTFORMS_DIR . '/js/calendar/calendar_stripped.js');
-	wp_enqueue_script('calendar-setup_stripped', '/' . _EASYCONTACTFORMS_DIR . '/js/calendar/calendar-setup_stripped.js');
-	wp_enqueue_script('calendar-en', '/' . _EASYCONTACTFORMS_DIR . '/js/calendar/lang/calendar-en.js');
+	wp_enqueue_script('json-json', '/' . _EASYCONTACTFORMS_DIR . '/js/json.js');
+	wp_enqueue_script('easy-contact-forms-html', '/' . _EASYCONTACTFORMS_DIR . '/easy-contact-formshtml.1.4.5.js');
+	wp_enqueue_script('jqui-scrollto', '/' . _EASYCONTACTFORMS_DIR . '/js/jqui/scrollto.js');
+	wp_enqueue_script('js-as', '/' . _EASYCONTACTFORMS_DIR . '/js/as.js');
+	wp_enqueue_script('js-ajaxupload', '/' . _EASYCONTACTFORMS_DIR . '/js/ajaxupload.js');
+	wp_enqueue_script('calendar-stripped', '/' . _EASYCONTACTFORMS_DIR . '/js/calendar/calendar_stripped.js');
+	wp_enqueue_script('calendar-setup-stripped', '/' . _EASYCONTACTFORMS_DIR . '/js/calendar/calendar-setup_stripped.js');
+	wp_enqueue_script('calendar-lang-en', '/' . _EASYCONTACTFORMS_DIR . '/js/calendar/lang/calendar-en.js');
 
 	if (EasyContactFormsApplicationSettings::getInstance()->get('UseTinyMCE')) {
 		wp_enqueue_script('tiny_mce', '/' . _EASYCONTACTFORMS_DIR . '/js/tinymce/tiny_mce.js');
@@ -305,9 +358,9 @@ function easycontactforms_formentrypoint($map) {
 	$js = '';
 	$as = EasyContactFormsApplicationSettings::getInstance();
 	if (!$as->get('FixJSLoading')) {
-		wp_enqueue_script('ufoforms', '/' . _EASYCONTACTFORMS_DIR . '/easy-contact-forms-forms.1.4.2.js');
+		wp_enqueue_script('ufoforms', '/' . _EASYCONTACTFORMS_DIR . '/easy-contact-forms-forms.1.4.5.js');
 	} else {
-	$js = '<script src="' . $base . '/' . _EASYCONTACTFORMS_DIR . '/easy-contact-forms-forms.1.4.2.js"></script>';
+	$js = '<script src="' . $base . '/' . _EASYCONTACTFORMS_DIR . '/easy-contact-forms-forms.1.4.5.js"></script>';
 	}
 
 	$pb = $as->getPBLink();

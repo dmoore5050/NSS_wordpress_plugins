@@ -77,7 +77,7 @@
       <table class='vtable'>
         <tr>
           <th style='width:8px'>
-            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'>
+            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'/>
           </th>
           <th>
             <?php EasyContactFormsIHTML::getColumnHeader(

@@ -54,21 +54,21 @@
             <select id='<?php echo $obj->sId('id');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('general');?>
             </select>
-            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Name');?>'><?php echo EasyContactFormsT::get('FirstName');?></label>
             <select id='<?php echo $obj->sId('Name');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='Name' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='Name' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Description');?>'><?php echo EasyContactFormsT::get('LastName');?></label>
             <select id='<?php echo $obj->sId('Description');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='Description' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='Description' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('ContactType');?>'><?php echo EasyContactFormsT::get('ContactType');?></label>

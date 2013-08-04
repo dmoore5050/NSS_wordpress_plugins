@@ -69,7 +69,7 @@
             <select id='<?php echo $obj->sId('id');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('general');?>
             </select>
-            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Date');?>'><?php echo EasyContactFormsT::get('Date');?></label>
@@ -77,17 +77,17 @@
               <?php echo $obj->sList('date');?>
             </select>
             <div class='ufo-input-wrapper' style='width:108px'>
-              <input type='text' id='Date' READONLY class='ufo-date datebox ufo-internal ufo-filtervalue'>
+              <input type='text' id='Date' READONLY class='ufo-date datebox ufo-internal ufo-filtervalue'/>
               <a id='Date-Trigger' href='javascript:;' class='ufo-triggerbutton icon_trigger_calendar'>&nbsp;&nbsp;</a>
             </div>
-            <input type='hidden' value='ufo.setupCalendar("Date", {ifFormat:"<?php echo EasyContactFormsApplicationSettings::getInstance()->getDateFormat('JS', TRUE); ?>", firstDay:0, align:"Bl", singleClick:true});' class='ufo-eval'>
+            <input type='hidden' value='ufo.setupCalendar("Date", {ifFormat:"<?php echo EasyContactFormsApplicationSettings::getInstance()->getDateFormat('JS', TRUE); ?>", firstDay:0, align:"Bl", singleClick:true});' class='ufo-eval'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('PageName');?>'><?php echo EasyContactFormsT::get('PageName');?></label>
             <select id='<?php echo $obj->sId('PageName');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='PageName' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='PageName' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
         </div>
         <div>
@@ -96,7 +96,7 @@
             <select id='<?php echo $obj->sId('Content');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='Content' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='Content' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Users');?>'><?php echo EasyContactFormsT::get('User');?></label>
@@ -121,7 +121,7 @@
       <table class='vtable'>
         <tr>
           <th style='width:8px'>
-            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'>
+            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'/>
           </th>
           <th style='width:18px'>
             <?php echo EasyContactFormsT::get('Empty');?>

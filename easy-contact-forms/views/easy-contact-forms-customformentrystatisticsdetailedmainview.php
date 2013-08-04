@@ -38,7 +38,7 @@
             <select id='<?php echo $obj->sId('PageName');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='PageName' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='PageName' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('CustomForms');?>'><?php echo EasyContactFormsT::get('CustomForms');?></label>
@@ -51,7 +51,7 @@
           </div>
           <div>
             <label for='IncludeIntoReporting'><?php echo EasyContactFormsT::get('ShowHidden');?></label>
-            <input type='checkbox' id='IncludeIntoReporting' value='off' class='ufo-cb checkbox ufo-filtervalue' onchange='this.value=(this.checked)?"on":"off"'>
+            <input type='checkbox' id='IncludeIntoReporting' value='off' class='ufo-cb checkbox ufo-filtervalue' onchange='this.value=(this.checked)?"on":"off";'/>
           </div>
         </div>
       </div>

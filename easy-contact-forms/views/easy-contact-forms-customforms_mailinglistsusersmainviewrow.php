@@ -33,7 +33,7 @@
 function getCustomForms_MailingListsUsersMainViewRow($view, $obj, $i, $map) { ?>
   <tr>
     <td class='firstcolumn'>
-      <input type='checkbox' id='<?php echo $view->idJoin('cb', $obj->getId());?>' value='off' class='ufo-deletecb' onchange='this.value=(this.checked)?"on":"off";'>
+      <input type='checkbox' id='<?php echo $view->idJoin('cb', $obj->getId());?>' value='off' class='ufo-deletecb' onchange='this.value=(this.checked)?"on":"off";'/>
     </td>
     <td>
       <a onclick='ufo.redirect({m:"show", oid:"<?php echo $obj->get('CustomForms');?>", t:"CustomForms"})'>

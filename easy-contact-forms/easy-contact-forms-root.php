@@ -495,11 +495,11 @@ class EasyContactFormsClassLoader {
 				$inst = new $classname($data, $new_id);
 				$valid =	$inst->isValid();
 				if ($data && !empty($new_id) && !$valid) {
-					return null;
+					return NULL;
 				}
 				return $inst;
 			} catch (Exception $e) {
-				return null;
+				return NULL;
 			}
 		}
 		else {

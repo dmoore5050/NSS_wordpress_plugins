@@ -454,7 +454,7 @@ class EasyContactFormsSecurityManager {
 		if (!isset($map['sid'])) {
 			return NULL;
 		}
-		$sessid = addslashes($map['sid']);
+		$sessid = mysql_real_escape_string($map['sid']);
 		if ($sessid != $map['sid']) {
 			return NULL;
 		}
@@ -486,7 +486,7 @@ class EasyContactFormsSecurityManager {
 	function setSessionValue($key, $value, $sid = NULL) {
 
 		if (is_array($sid) && isset($sid['sid'])) {
-			$sessid = addslashes($sid['sid']);
+			$sessid = mysql_real_escape_string($sid['sid']);
 			if ($sessid != $sid['sid']) {
 				return NULL;
 			}

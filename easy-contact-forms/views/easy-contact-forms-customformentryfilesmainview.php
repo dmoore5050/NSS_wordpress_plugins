@@ -69,14 +69,14 @@ EasyContactFormsLayout::getFormHeader2Body();
             <select id='<?php echo $obj->sId('id');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('general');?>
             </select>
-            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Description');?>'><?php echo EasyContactFormsT::get('Field');?></label>
             <select id='<?php echo $obj->sId('Description');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='Description' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='Description' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Date');?>'><?php echo EasyContactFormsT::get('Date');?></label>
@@ -84,10 +84,10 @@ EasyContactFormsLayout::getFormHeader2Body();
               <?php echo $obj->sList('general');?>
             </select>
             <div class='ufo-input-wrapper' style='width:108px'>
-              <input type='text' id='Date' READONLY class='ufo-date datebox ufo-internal ufo-filtervalue'>
+              <input type='text' id='Date' READONLY class='ufo-date datebox ufo-internal ufo-filtervalue'/>
               <a id='Date-Trigger' href='javascript:;' class='ufo-triggerbutton icon_trigger_calendar'>&nbsp;&nbsp;</a>
             </div>
-            <input type='hidden' value='ufo.setupCalendar("Date", {ifFormat:"<?php echo EasyContactFormsApplicationSettings::getInstance()->getDateFormat('JS'); ?>", firstDay:0, align:"Bl", singleClick:true});' class='ufo-eval'>
+            <input type='hidden' value='ufo.setupCalendar("Date", {ifFormat:"<?php echo EasyContactFormsApplicationSettings::getInstance()->getDateFormat('JS'); ?>", firstDay:0, align:"Bl", singleClick:true});' class='ufo-eval'/>
           </div>
         </div>
         <div>
@@ -96,7 +96,7 @@ EasyContactFormsLayout::getFormHeader2Body();
             <select id='<?php echo $obj->sId('CustomFormsEntries');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('ref');?>
             </select>
-            <input type='text' id='CustomFormsEntries' class='inputselect ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='CustomFormsEntries' class='inputselect ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('CustomForms');?>'><?php echo EasyContactFormsT::get('CustomForms');?></label>
@@ -116,7 +116,7 @@ EasyContactFormsLayout::getFormHeader2Body();
       <table class='vtable'>
         <tr>
           <th style='width:8px'>
-            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'>
+            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'/>
           </th>
           <th style='width:30px'>
             <?php EasyContactFormsIHTML::getColumnHeader(array('view' => $obj, 'field' => "id"));?>

@@ -44,7 +44,7 @@ function getCustomFormsEntriesDetailedMainViewRow($view, $obj, $i, $map) {
   ?>
   <tr class='ufohighlight <?php EasyContactFormsIHTML::getTrSwapClassName($i);?>'>
     <td class='firstcolumn'>
-      <input type='checkbox' id='<?php echo $view->idJoin('cb', $obj->getId());?>' value='off' class='ufo-deletecb' onchange='this.value=(this.checked)?"on":"off";'>
+      <input type='checkbox' id='<?php echo $view->idJoin('cb', $obj->getId());?>' value='off' class='ufo-deletecb' onchange='this.value=(this.checked)?"on":"off";'/>
     </td>
     <td>
       <?php

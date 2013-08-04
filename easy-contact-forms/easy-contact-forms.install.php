@@ -14,312 +14,244 @@ function easycontactforms_install() {
 
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	require_once dirName(__FILE__) . DIRECTORY_SEPARATOR . 'easy-contact-forms-database.php';
-
-	$sqls = array();
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_customformfields');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX FieldSet";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX CustomForms";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Type";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX ListPosition";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_customformsentries');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX CustomForms";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Users";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX SiteUser";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_contacttypes');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_customformentryfiles');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX CustomFormsEntries";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_customforms_mailinglists');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX CustomForms";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Contacts";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_users');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX ContactType";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX CMSId";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Role";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX descriptionname";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_customformentrystatistics');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX CustomForms";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_customforms');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX ObjectOwner";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_applicationsettings');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_options');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX OptionGroup";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_customformfieldtypes');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Description";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX ListPosition";
-	}
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_files');
-	if($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") == $table_name) {
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX Docid";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX typefieldid";
-		$sqls[] = "ALTER TABLE {$table_name} DROP INDEX ObjectOwner";
-	}
-	foreach($sqls as $sql) {
-		$wpdb->query($sql);
-	}
 				
 	$sqls = array();
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_applicationsettings (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				TinyMCEConfig TEXT,
-				UseTinyMCE BOOLEAN,
-				ApplicationWidth INT(10),
-				ApplicationWidth2 INT(10),
-				DefaultStyle VARCHAR(50),
-				DefaultStyle2 VARCHAR(50),
-				SecretWord VARCHAR(50),
-				NotLoggenInText TEXT,
-				FileFolder VARCHAR(900),
-				SendFrom VARCHAR(100),
-				FixJSLoading BOOLEAN,
-				FormCompletionMinTime INT(10),
-				FormCompletionMaxTime INT(10),
-				FixStatus0 BOOLEAN,
-				ProductVersion VARCHAR(25),
-				PhoneRegEx VARCHAR(100),
-				DateFormat VARCHAR(500),
-				DateTimeFormat VARCHAR(500),
-				InitTime INT(11),
-				ShowPoweredBy BOOLEAN,
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				TinyMCEConfig text,
+				UseTinyMCE tinyint(1),
+				ApplicationWidth int(10),
+				ApplicationWidth2 int(10),
+				DefaultStyle varchar(50),
+				DefaultStyle2 varchar(50),
+				SecretWord varchar(50),
+				NotLoggenInText text,
+				FileFolder varchar(900),
+				SendFrom varchar(100),
+				FixJSLoading tinyint(1),
+				FormCompletionMinTime int(10),
+				FormCompletionMaxTime int(10),
+				FixStatus0 tinyint(1),
+				ProductVersion varchar(25),
+				PhoneRegEx varchar(100),
+				DateFormat varchar(500),
+				DateTimeFormat varchar(500),
+				InitTime int(11),
+				ShowPoweredBy tinyint(1),
+				FixStatus02 tinyint(1),
+				w3cCompliant tinyint(1),
+				w3cStyle varchar(50),
 				PRIMARY KEY  (id),
-				INDEX Description (Description)) $collate;";
+				KEY Description (Description)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_contacttypes (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				Notes TEXT,
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				Notes text,
 				PRIMARY KEY  (id),
-				INDEX Description (Description)) $collate;";
+				KEY Description (Description)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_customformentryfiles (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				Date INT(11),
-				CustomFormsEntries INT(11) NOT NULL DEFAULT 0,
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				Date int(11),
+				CustomFormsEntries int(11) NOT NULL DEFAULT 0,
 				PRIMARY KEY  (id),
-				INDEX Description (Description),
-				INDEX CustomFormsEntries (CustomFormsEntries)) $collate;";
+				KEY Description (Description),
+				KEY CustomFormsEntries (CustomFormsEntries)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_customformentrystatistics (
-				id INT(11) NOT NULL auto_increment ,
-				PageName VARCHAR(300),
-				TotalEntries INT(10),
-				IncludeIntoReporting BOOLEAN,
-				CustomForms INT(11) NOT NULL DEFAULT 0,
-				Impressions INT(10),
+				id int(11) NOT NULL auto_increment,
+				PageName varchar(300),
+				TotalEntries int(10),
+				IncludeIntoReporting tinyint(1),
+				CustomForms int(11) NOT NULL DEFAULT 0,
+				Impressions int(10),
 				PRIMARY KEY  (id),
-				INDEX CustomForms (CustomForms)) $collate;";
+				KEY CustomForms (CustomForms)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_customformfields (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				Type INT(11) NOT NULL DEFAULT 0,
-				Settings TEXT,
-				Template TEXT,
-				ListPosition INT(10) NOT NULL DEFAULT 0,
-				CustomForms INT(11) NOT NULL DEFAULT 0,
-				FieldSet INT(10),
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				Type int(11) NOT NULL DEFAULT 0,
+				Settings text,
+				Template text,
+				ListPosition int(10) NOT NULL DEFAULT 0,
+				CustomForms int(11) NOT NULL DEFAULT 0,
+				FieldSet int(10),
 				PRIMARY KEY  (id),
-				INDEX FieldSet (FieldSet),
-				INDEX Description (Description),
-				INDEX CustomForms (CustomForms),
-				INDEX Type (Type),
-				INDEX ListPosition (ListPosition)) $collate;";
+				KEY FieldSet (FieldSet),
+				KEY Description (Description),
+				KEY CustomForms (CustomForms),
+				KEY Type (Type),
+				KEY ListPosition (ListPosition)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_customformfieldtypes (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				CssClass VARCHAR(100),
-				Settings TEXT,
-				Signature TEXT,
-				ListPosition INT(10) NOT NULL DEFAULT 0,
-				ValueField BOOLEAN,
-				HelpLink TEXT,
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				CssClass varchar(100),
+				Settings text,
+				Signature text,
+				ListPosition int(10) NOT NULL DEFAULT 0,
+				ValueField tinyint(1),
+				HelpLink text,
 				PRIMARY KEY  (id),
-				INDEX Description (Description),
-				INDEX ListPosition (ListPosition)) $collate;";
+				KEY Description (Description),
+				KEY ListPosition (ListPosition)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_customforms (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				NotificationSubject VARCHAR(200),
-				SendFrom VARCHAR(200),
-				SendConfirmation BOOLEAN,
-				ConfirmationSubject VARCHAR(200),
-				ConfirmationText TEXT,
-				Redirect BOOLEAN,
-				RedirectURL TEXT,
-				ShortCode VARCHAR(300),
-				Template BOOLEAN,
-				ObjectOwner INT(11) NOT NULL DEFAULT 0,
-				SubmissionSuccessText TEXT,
-				StyleSheet TEXT,
-				HTML MEDIUMTEXT,
-				SendFromAddress VARCHAR(200),
-				ShowSubmissionSuccess BOOLEAN,
-				SuccessMessageClass VARCHAR(200),
-				FailureMessageClass VARCHAR(200),
-				Width INT(10),
-				WidthUnit VARCHAR(5),
-				LineHeight INT(10),
-				LineHeightUnit VARCHAR(5),
-				FormClass VARCHAR(200),
-				FormStyle TEXT,
-				Style VARCHAR(50),
-				ConfirmationStyleSheet TEXT,
-				TotalEntries INT(10),
-				TotalProcessedEntries INT(10),
-				Impressions INT(10),
-				NotificationText TEXT,
-				IncludeVisitorsAddressInReplyTo BOOLEAN,
-				ReplyToNameTemplate VARCHAR(200),
-				ConfirmationReplyToName VARCHAR(200),
-				ConfirmationReplyToAddress VARCHAR(200),
-				NotificationStyleSheet TEXT,
-				SendConfirmationAsText BOOLEAN,
-				SendNotificationAsText BOOLEAN,
-				FadingDelay INT(10),
-				MessageDelay INT(10),
-				IncludeIntoReporting BOOLEAN,
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				NotificationSubject varchar(200),
+				SendFrom varchar(200),
+				SendConfirmation tinyint(1),
+				ConfirmationSubject varchar(200),
+				ConfirmationText text,
+				Redirect tinyint(1),
+				RedirectURL text,
+				ShortCode varchar(300),
+				Template tinyint(1),
+				ObjectOwner int(11) NOT NULL DEFAULT 0,
+				SubmissionSuccessText text,
+				StyleSheet text,
+				HTML mediumtext,
+				SendFromAddress varchar(200),
+				ShowSubmissionSuccess tinyint(1),
+				SuccessMessageClass varchar(200),
+				FailureMessageClass varchar(200),
+				Width int(10),
+				WidthUnit varchar(5),
+				LineHeight int(10),
+				LineHeightUnit varchar(5),
+				FormClass varchar(200),
+				FormStyle text,
+				Style varchar(50),
+				ConfirmationStyleSheet text,
+				TotalEntries int(10),
+				TotalProcessedEntries int(10),
+				Impressions int(10),
+				NotificationText text,
+				IncludeVisitorsAddressInReplyTo tinyint(1),
+				ReplyToNameTemplate varchar(200),
+				ConfirmationReplyToName varchar(200),
+				ConfirmationReplyToAddress varchar(200),
+				NotificationStyleSheet text,
+				SendConfirmationAsText tinyint(1),
+				SendNotificationAsText tinyint(1),
+				FadingDelay int(10),
+				MessageDelay int(10),
+				IncludeIntoReporting tinyint(1),
 				PRIMARY KEY  (id),
-				INDEX ObjectOwner (ObjectOwner),
-				INDEX Description (Description)) $collate;";
+				KEY ObjectOwner (ObjectOwner),
+				KEY Description (Description)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_customforms_mailinglists (
-				id INT(11) NOT NULL auto_increment ,
-				CustomForms INT(11) NOT NULL DEFAULT 0,
-				Contacts INT(11) NOT NULL DEFAULT 0,
+				id int(11) NOT NULL auto_increment,
+				CustomForms int(11) NOT NULL DEFAULT 0,
+				Contacts int(11) NOT NULL DEFAULT 0,
 				PRIMARY KEY  (id),
-				INDEX CustomForms (CustomForms),
-				INDEX Contacts (Contacts)) $collate;";
+				KEY CustomForms (CustomForms),
+				KEY Contacts (Contacts)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_customformsentries (
-				id INT(11) NOT NULL auto_increment ,
-				Date INT(11),
-				Content MEDIUMTEXT,
-				Header TEXT,
-				Data TEXT,
-				CustomForms INT(11) NOT NULL DEFAULT 0,
-				Users INT(11) NOT NULL DEFAULT 0,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				SiteUser INT(11) NOT NULL DEFAULT 0,
-				PageName VARCHAR(300),
+				id int(11) NOT NULL auto_increment,
+				Date int(11),
+				Content mediumtext,
+				Header text,
+				Data text,
+				CustomForms int(11) NOT NULL DEFAULT 0,
+				Users int(11) NOT NULL DEFAULT 0,
+				Description varchar(200) NOT NULL DEFAULT '',
+				SiteUser int(11) NOT NULL DEFAULT 0,
+				PageName varchar(300),
 				PRIMARY KEY  (id),
-				INDEX Description (Description),
-				INDEX CustomForms (CustomForms),
-				INDEX Users (Users),
-				INDEX SiteUser (SiteUser)) $collate;";
+				KEY Description (Description),
+				KEY CustomForms (CustomForms),
+				KEY Users (Users),
+				KEY SiteUser (SiteUser)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_files (
-				id INT(11) NOT NULL auto_increment ,
-				Doctype VARCHAR(80),
-				Docfield VARCHAR(80),
-				Docid INT(10),
-				Name VARCHAR(300),
-				Type VARCHAR(80),
-				Size INT(10),
-				Protected BOOLEAN,
-				Webdir BOOLEAN,
-				Count INT(11),
-				Storagename VARCHAR(300),
-				ObjectOwner INT(11),
+				id int(11) NOT NULL auto_increment,
+				Doctype varchar(80),
+				Docfield varchar(80),
+				Docid int(10),
+				Name varchar(300),
+				Type varchar(80),
+				Size int(10),
+				Protected tinyint(1),
+				Webdir tinyint(1),
+				Count int(11),
+				Storagename varchar(300),
+				ObjectOwner int(11),
 				PRIMARY KEY  (id),
-				INDEX Docid (Docid),
-				INDEX typefieldid (Doctype, Docfield, Docid),
-				INDEX ObjectOwner (ObjectOwner)) $collate;";
+				KEY Docid (Docid),
+				KEY typefieldid (Doctype,Docfield,Docid),
+				KEY ObjectOwner (ObjectOwner)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_options (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				Value TEXT,
-				OptionGroup VARCHAR(20),
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				Value text,
+				OptionGroup varchar(20),
 				PRIMARY KEY  (id),
-				INDEX OptionGroup (OptionGroup),
-				INDEX Description (Description)) $collate;";
+				KEY OptionGroup (OptionGroup),
+				KEY Description (Description)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_roles (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(100) NOT NULL DEFAULT '',
-				Admin BOOLEAN,
-				Employee BOOLEAN,
+				id int(11) NOT NULL auto_increment,
+				Description varchar(100) NOT NULL DEFAULT '',
+				Admin tinyint(1),
+				Employee tinyint(1),
 				PRIMARY KEY  (id)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_users (
-				id INT(11) NOT NULL auto_increment ,
-				Description VARCHAR(200) NOT NULL DEFAULT '',
-				Name VARCHAR(100),
-				ContactType INT(11) NOT NULL DEFAULT 0,
-				Birthday INT(11),
-				Role INT(11) NOT NULL DEFAULT 0,
-				CMSId INT(11),
-				Notes TEXT,
-				email VARCHAR(100),
-				email2 VARCHAR(100),
-				Cell VARCHAR(30),
-				Phone1 VARCHAR(30),
-				Phone2 VARCHAR(30),
-				Phone3 VARCHAR(30),
-				SkypeId VARCHAR(100),
-				Website VARCHAR(200),
-				ContactField3 TEXT,
-				ContactField4 TEXT,
-				Country VARCHAR(300),
-				Address TEXT,
-				City VARCHAR(300),
-				State VARCHAR(300),
-				Zip VARCHAR(20),
-				Comment TEXT,
-				History TEXT,
-				Options TEXT,
+				id int(11) NOT NULL auto_increment,
+				Description varchar(200) NOT NULL DEFAULT '',
+				Name varchar(100),
+				ContactType int(11) NOT NULL DEFAULT 0,
+				Birthday int(11),
+				Role int(11) NOT NULL DEFAULT 0,
+				CMSId int(11),
+				Notes text,
+				email varchar(100),
+				email2 varchar(100),
+				Cell varchar(30),
+				Phone1 varchar(30),
+				Phone2 varchar(30),
+				Phone3 varchar(30),
+				SkypeId varchar(100),
+				Website varchar(200),
+				ContactField3 text,
+				ContactField4 text,
+				Country varchar(300),
+				Address text,
+				City varchar(300),
+				State varchar(300),
+				Zip varchar(20),
+				Comment text,
+				History text,
+				Options text,
 				PRIMARY KEY  (id),
-				INDEX ContactType (ContactType),
-				INDEX CMSId (CMSId),
-				INDEX Description (Description),
-				INDEX Role (Role),
-				INDEX descriptionname (Description, Name)) $collate;";
+				KEY ContactType (ContactType),
+				KEY CMSId (CMSId),
+				KEY Description (Description),
+				KEY Role (Role),
+				KEY descriptionname (Description,Name)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_acl (
-				id INT(11) NOT NULL auto_increment,
-				objtype VARCHAR(50) NOT NULL,
-				method VARCHAR(50) NOT NULL,
-				name VARCHAR(50) NOT NULL,
-				role VARCHAR(50) NOT NULL,
+				id int(11) NOT NULL auto_increment,
+				objtype varchar(50) NOT NULL,
+				method varchar(50) NOT NULL,
+				name varchar(50) NOT NULL,
+				role varchar(50) NOT NULL,
 				PRIMARY KEY  (id)) $collate;";
 				
 	$sqls[] = "CREATE TABLE #wp__easycontactforms_sessions (
-				id INT(11) NOT NULL auto_increment,
-				opentime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-				value TEXT,
-				sid CHAR(32) NOT NULL,
+				id int(11) NOT NULL auto_increment,
+				opentime timestamp DEFAULT CURRENT_TIMESTAMP,
+				value text,
+				sid char(32) NOT NULL,
 				PRIMARY KEY  (id)) $collate;";
 				
 	foreach ($sqls as $sql){
@@ -835,6 +767,340 @@ function easycontactforms_install_data() {
 
 	$rows = array(
 		array(
+			'objtype' => 'CustomForms',
+			'method' => 'val',
+			'name' => 'main',
+			'role' => 'Guest',
+		),
+		array(
+			'objtype' => 'CustomFormEntryStatistics',
+			'method' => 'viewDetailed',
+			'name' => 'detailedMain',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'deleteField',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Files',
+			'method' => 'deletefile',
+			'name' => 'main',
+			'role' => 'Guest',
+		),
+		array(
+			'objtype' => 'ApplicationSettings',
+			'method' => 'show',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms_MailingLists',
+			'method' => 'view',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormsEntries',
+			'method' => 'view',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'DashBoard',
+			'method' => 'show',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'updateFieldData',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormEntryFiles',
+			'method' => 'view',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'add',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormsEntries',
+			'method' => 'show',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'DashBoard',
+			'method' => 'getFormPageStatistics',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'val',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'ContactTypes',
+			'method' => 'view',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'ContactTypes',
+			'method' => 'show',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'new',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormEntryStatistics',
+			'method' => 'show',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormEntryStatistics',
+			'method' => 'view',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'moveFieldSet',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Files',
+			'method' => 'download',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'view',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'refreshForm',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormEntryStatistics',
+			'method' => 'setFormPageStatisticsShowOnDashboard',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'preview',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Files',
+			'method' => 'download',
+			'name' => 'main',
+			'role' => 'Guest',
+		),
+		array(
+			'objtype' => 'Files',
+			'method' => 'upload',
+			'name' => 'main',
+			'role' => 'Guest',
+		),
+		array(
+			'objtype' => 'DashBoard',
+			'method' => 'getUserStatistics',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormEntryStatistics',
+			'method' => 'resetFormPageStatistics',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Files',
+			'method' => 'upload',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormEntryStatistics',
+			'method' => 'new',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Users',
+			'method' => 'getEUserASList',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'show',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormsEntries',
+			'method' => 'viewDetailed',
+			'name' => 'detailedMain',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormEntryFiles',
+			'method' => 'viewDetailed',
+			'name' => 'detailedMain',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'copyField',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'updateOrder',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'addCustomField',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormsEntries',
+			'method' => 'processEntry',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'getSettingsForm',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'DashBoard',
+			'method' => 'getFormStatistics',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Users',
+			'method' => 'view',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'DashBoard',
+			'method' => 'getEntryStatistics',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomFormFields',
+			'method' => 'viewDetailed',
+			'name' => 'detailedMain',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'add',
+			'name' => 'main',
+			'role' => 'Guest',
+		),
+		array(
+			'objtype' => 'Users',
+			'method' => 'getUserASList',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'ApplicationSettings',
+			'method' => 'allowPBLink',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Users',
+			'method' => 'new',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Users',
+			'method' => 'show',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'resetStatistics',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'ApplicationSettings',
+			'method' => 'setOptionValue',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'CustomForms',
+			'method' => 'copy',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'Files',
+			'method' => 'deletefile',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+		array(
+			'objtype' => 'ContactTypes',
+			'method' => 'new',
+			'name' => 'main',
+			'role' => 'SuperAdmin',
+		),
+	);
+
+	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_acl');
+	$wpdb->query('DELETE FROM ' . $table_name . ' WHERE 1;' );
+	foreach ($rows as $row) {
+		$wpdb->insert($table_name, $row);
+	}
+
+
+	$rows = array(
+		array(
 			'id' => 3,
 			'Description' => 'Select',
 			'CssClass' => 'ufo-customfield-select',
@@ -923,14 +1189,6 @@ function easycontactforms_install_data() {
 			'ValueField' => 1,
 		),
 		array(
-			'id' => 17,
-			'Description' => 'Meeting Scheduler',
-			'CssClass' => 'ufo-customfield-meetingscheduler',
-			'Settings' => '<form><SetVCitaOptions>on</SetVCitaOptions><ShowLabel>on</ShowLabel><Label>Schedule a meeting with us</Label><ShowDescription>off</ShowDescription><Description/><DescriptionPosition>bottom</DescriptionPosition><Advanced/><DescriptionCSSClass>ufo-customfields-field-description</DescriptionCSSClass><DescriptionCSSStyle/><SetStyle>on</SetStyle><CSSClass>ufo-frontendbutton blue</CSSClass><CSSStyle/><RowCSSClass/><UseLink>off</UseLink></form>',
-			'ListPosition' => 1250,
-			'ValueField' => 0,
-		),
-		array(
 			'id' => 22,
 			'Description' => 'File Upload',
 			'CssClass' => 'ufo-customfield-fileupload',
@@ -971,340 +1229,6 @@ function easycontactforms_install_data() {
 
 	$rows = array(
 		array(
-			'objtype' => 'CustomForms',
-			'method' => 'val',
-			'name' => 'main',
-			'role' => 'Guest',
-		),
-		array(
-			'objtype' => 'CustomFormEntryStatistics',
-			'method' => 'viewDetailed',
-			'name' => 'detailedMain',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'deleteField',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'ApplicationSettings',
-			'method' => 'show',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Files',
-			'method' => 'deletefile',
-			'name' => 'main',
-			'role' => 'Guest',
-		),
-		array(
-			'objtype' => 'CustomFormsEntries',
-			'method' => 'view',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms_MailingLists',
-			'method' => 'view',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'updateFieldData',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'DashBoard',
-			'method' => 'show',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'add',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormEntryFiles',
-			'method' => 'view',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'DashBoard',
-			'method' => 'getFormPageStatistics',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormsEntries',
-			'method' => 'show',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'ContactTypes',
-			'method' => 'view',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'val',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'new',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'ContactTypes',
-			'method' => 'show',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormEntryStatistics',
-			'method' => 'show',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormEntryStatistics',
-			'method' => 'view',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'moveFieldSet',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Files',
-			'method' => 'download',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'refreshForm',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'view',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'preview',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormEntryStatistics',
-			'method' => 'setFormPageStatisticsShowOnDashboard',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Files',
-			'method' => 'download',
-			'name' => 'main',
-			'role' => 'Guest',
-		),
-		array(
-			'objtype' => 'Files',
-			'method' => 'upload',
-			'name' => 'main',
-			'role' => 'Guest',
-		),
-		array(
-			'objtype' => 'DashBoard',
-			'method' => 'getUserStatistics',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormEntryStatistics',
-			'method' => 'resetFormPageStatistics',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Files',
-			'method' => 'upload',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormEntryStatistics',
-			'method' => 'new',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Users',
-			'method' => 'getEUserASList',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'show',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormEntryFiles',
-			'method' => 'viewDetailed',
-			'name' => 'detailedMain',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormsEntries',
-			'method' => 'viewDetailed',
-			'name' => 'detailedMain',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'updateOrder',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'copyField',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormsEntries',
-			'method' => 'processEntry',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'addCustomField',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'DashBoard',
-			'method' => 'getFormStatistics',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'getSettingsForm',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Users',
-			'method' => 'view',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'DashBoard',
-			'method' => 'getEntryStatistics',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomFormFields',
-			'method' => 'viewDetailed',
-			'name' => 'detailedMain',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'add',
-			'name' => 'main',
-			'role' => 'Guest',
-		),
-		array(
-			'objtype' => 'Users',
-			'method' => 'getUserASList',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'ApplicationSettings',
-			'method' => 'allowPBLink',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Users',
-			'method' => 'new',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Users',
-			'method' => 'show',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'resetStatistics',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'ApplicationSettings',
-			'method' => 'setOptionValue',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'Files',
-			'method' => 'deletefile',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'CustomForms',
-			'method' => 'copy',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-		array(
-			'objtype' => 'ContactTypes',
-			'method' => 'new',
-			'name' => 'main',
-			'role' => 'SuperAdmin',
-		),
-	);
-
-	$table_name = EasyContactFormsDB::wptn('#wp__easycontactforms_acl');
-	$wpdb->query('DELETE FROM ' . $table_name . ' WHERE 1;' );
-	foreach ($rows as $row) {
-		$wpdb->insert($table_name, $row);
-	}
-
-
-	$rows = array(
-		array(
 			'id' => 1,
 			'Description' => 'AppSettings',
 			'TinyMCEConfig' => '{theme_advanced_buttons4:"",mode:"exact",theme_advanced_statusbar_location:"",theme_advanced_toolbar_align:"left",theme_advanced_resizing:"true",plugins:"fullscreen",theme_advanced_toolbar_location:"top",theme_advanced_buttons1:"bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect",theme_advanced_buttons2:"bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,cleanup,|,forecolor,backcolor,|,fullscreen",theme_advanced_buttons3:"",theme:"advanced", relative_urls : false, remove_script_host: false}',
@@ -1320,6 +1244,9 @@ function easycontactforms_install_data() {
 			'DateFormat' => 'Y-m-d^%Y-%m-%d^\d{4}-\d{2}-\d{2}$^2012-01-25',
 			'DateTimeFormat' => 'Y-m-d H:i^%Y-%m-%d %H:%M^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}^Y-m-d hh:mm',
 			'ShowPoweredBy' => 0,
+			'FixStatus02' => 0,
+			'w3cCompliant' => 0,
+			'w3cStyle' => 'easyform',
 		),
 	);
 
@@ -1411,7 +1338,7 @@ function easycontactforms_install_data() {
 	require_once dirName(__FILE__) . DIRECTORY_SEPARATOR . 'easy-contact-forms-root.php';
 	require_once dirName(__FILE__) . DIRECTORY_SEPARATOR . 'easy-contact-forms-applicationsettings.php';
 	$as = EasyContactFormsApplicationSettings::getInstance();
-	$as->set('ProductVersion', '1.4.2');
+	$as->set('ProductVersion', '1.4.5');
 	$as->save();}
 
 

@@ -181,6 +181,32 @@ class EasyContactFormsCustomFormsEntries extends EasyContactFormsBase {
 			$user->user = $currentuser;
 		}
 
+		foreach ($xml->children() as $xmlfld) {
+			$value = (string) $xmlfld->h1;
+			unset($xmlfld->h1);
+			if (empty($value)) {
+				continue;
+			}
+			$fldid = (string) $xmlfld->attributes()->id;
+			$fldid = intval($fldid);
+
+			$settings = EasyContactFormsDB::getValue("SELECT CustomFormFields.Settings FROM #wp__easycontactforms_customformfields AS CustomFormFields WHERE CustomFormFields.id = $fldid");
+
+			if (empty($settings)) {
+				continue;
+			}
+			$settings = simplexml_load_string($settings);
+			$link = (string) $settings->LinkToAppField;
+			if (!empty($link)) {
+				$link = explode('_', $link);
+				if (count($link) > 1) {
+					$user->set($link[1], $value);
+				}
+			}
+		}
+
+		$content = $xml->asXML();
+		$user->set('History',  $content . '<br><br>' . $user->get('History'));
 		$user->save();
 		$entry->set('Date', EasyContactFormsUtils::getDate($entry->get('Date'), false, true, true));
 		$entry->set('Users', $user->get('id'));

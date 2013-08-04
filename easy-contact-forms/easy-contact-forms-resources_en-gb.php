@@ -97,6 +97,7 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $CF_Hint_LinkToAppField = 'Select a database field to link the form field to';
  var $CF_Hint_OnlyAdminsCanDownload = 'If a download file link is inserted into an email message template and this checkbox is set, only Admins will be able to download files using emailed links';
  var $CF_Hint_Options = 'In order to edit option values place the cursor into an appropriate field';
+ var $CF_Hint_RadioTableSettings = 'Radio table settings';
  var $CF_Hint_RegistredUsersOptions = 'Select how the field will behave for a logged in user';
  var $CF_Hint_Required = 'Indicates if this field is required';
  var $CF_Hint_RequiredMessage = 'This is a message to show when visitors enter an invalid value or skip this field when it is required';
@@ -143,6 +144,9 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $CF_Pin = 'Pin';
  var $CF_PrivacyPolicy = 'Privacy policy';
  var $CF_ProcessEntry = 'Process entry';
+ var $CF_RadioTableColumns = 'Radio table columns';
+ var $CF_RadioTableRows = 'Radio table rows';
+ var $CF_RadioTableSettings = 'Radio table settings';
  var $CF_ReCaptchaLanguage = 'Language';
  var $CF_ReCaptchaPrivateKey = 'reCaptcha private key';
  var $CF_ReCaptchaPublicKey = 'reCaptcha public key. Get it from <a href="https://www.google.com/recaptcha/admin/create" target=_blank>https://www.google.com/recaptcha</a>';
@@ -258,6 +262,7 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $DateFormatLabel = 'Date format';
  var $DateTimeFormat = 'Y-m-d H:i';
  var $DefaultStyle = 'Default style';
+ var $DefaultW3CStyle = 'Default W3C style';
  var $Delete = 'Delete';
  var $Description = 'Title';
  var $Download = 'Download';
@@ -288,6 +293,7 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $FirstName = 'First name';
  var $FixJSLoading = 'Fix JS loading (see the FAQ Section)';
  var $FixStatus0 = 'Fix Status = 0';
+ var $FixStatus02 = 'Fix Status = 0, Alternative way';
  var $FormClass = 'Form class';
  var $FormCompletionMaxTime = 'Form completion max time (sec)';
  var $FormCompletionMinTime = 'Form completion min time (sec)';
@@ -307,9 +313,11 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $Hint_ApplicationSettings_ApplicationWidth = 'Change this value if you need to change the plugin admin on the site front end';
  var $Hint_ApplicationSettings_DateFormatLabel = 'Select a date format from the list below and click Apply';
  var $Hint_ApplicationSettings_DefaultStyle = 'Change this value if you have your own admin style on the site front end';
+ var $Hint_ApplicationSettings_DefaultW3CStyle = 'Sets the default style in the W3C compatible mode. Do not change this field value, if you are not sure';
  var $Hint_ApplicationSettings_FileFolder = 'If you change the folder name do not forget to copy existent files into the new directory';
  var $Hint_ApplicationSettings_FixJSLoading = 'If you do not see a form submit button set this checkbox, then make any change to the form and save it';
  var $Hint_ApplicationSettings_FixStatus0 = 'Set this checkbox if your form shows Error Status = 0, then make any change to the form and save it';
+ var $Hint_ApplicationSettings_FixStatus02 = 'This is an alternative way to try to fix the Error Status = 0 error. Same to the above';
  var $Hint_ApplicationSettings_FormCompletionMaxTime = 'Set this value in order to restrict form max completion time (anti-spam protection)';
  var $Hint_ApplicationSettings_FormCompletionMinTime = 'Set this value in order to restrict form min completion time (anti-spam protection)';
  var $Hint_ApplicationSettings_NotLoggedInText = 'This text will display when a user does not have a user profile in the application';
@@ -317,6 +325,7 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $Hint_ApplicationSettings_SecretWord = 'A string used for encryption. The longer the better. It should not be changed once it is set';
  var $Hint_ApplicationSettings_SendFromAddress = 'This address will be used to send notification messages instead of default';
  var $Hint_ApplicationSettings_UseTinyMCE = 'Disables the HTML editor if unset. After this checkbox is set again, press your browser Reload button';
+ var $Hint_ApplicationSettings_w3cCompliant = 'Set this checkbox to run all the forms in the W3C compliant mode. Read the correspondent FAQ question prior to setting this checkbox';
  var $Hint_CustomForms_ConfirmationReplyToAddress = 'Use this field if you want to receive replies to other email address (i.e. jonhdoe@anotherdomain.com)';
  var $Hint_CustomForms_ConfirmationReplyToName = 'Use this field if you want to receive replies to other name, i.e. "John Smith"';
  var $Hint_CustomForms_ConfirmationSubject = 'Confirmation email message subject. Supports {112.FirstName} fields';
@@ -386,7 +395,7 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $Option = 'Option';
  var $Options = 'Options';
  var $PageName = 'Page name';
- var $PageStatistics = 'Page statistics';
+ var $PageStatistics = 'Page conversion';
  var $Phone1 = 'Phone 1';
  var $Phone2 = 'Phone 2';
  var $Phone3 = 'Phone 3';
@@ -470,6 +479,7 @@ class EasyContactFormsT extends EasyContactFormsStrings {
  var $ViewScroller = 'View scroller';
  var $VisitChampionForms = '<b>Champion Forms</b> site';
  var $VisitEasyContactForms = '<b>Easy Contact Forms</b> site';
+ var $w3cCompliant = 'Run in w3c compliant mode';
  var $Website = 'Website';
  var $WhatsNew = 'What\'s new';
  var $WidthUnit = 'Width unit';

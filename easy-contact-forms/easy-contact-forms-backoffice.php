@@ -23,38 +23,6 @@
 class EasyContactFormsBackOffice {
 
 	/**
-	 * 	sendNotification
-	 *
-	 * 	sends an email message in response to user actions
-	 *
-	 * @param int $uid
-	 * 	user id
-	 * @param string $type
-	 * 	object type
-	 * @param int $oid
-	 * 	object id
-	 * @param string $text
-	 * 	message text
-	 */
-	function sendNotification($uid, $type, $oid, $text) {
-
-		$sender = $this->getSenderData($uid);
-		if (!$sender) {
-			return;
-		}
-		$emaillist = $this->getListMemberEmails($type, $oid);
-		if (sizeof($emaillist) == 0) {
-			return;
-		}
-		$object = $this->prepareObject($type, $oid);
-		$template = $this->getTemplate($type);
-		$message = $this->fillInTemplate($template, $object);
-		$message = $this->merge($message, $text);
-		$this->send($message, $emaillist, $sender);
-
-	}
-
-	/**
 	 * 	getSenderData
 	 *
 	 * 	get current user data from a database
@@ -191,8 +159,8 @@ class EasyContactFormsBackOffice {
 			$fields = get_object_vars($object);
 			foreach ($fields as $fname => $fvalue) {
 				$value = (
-					(EasyContactFormsUtils::endsWith($fname, 'date') ||
-					EasyContactFormsUtils::endsWith($fname, 'deadline')) &&
+					(EasyContactFormsUtils::endsWith(strtolower($fname), 'date') ||
+					EasyContactFormsUtils::endsWith(strtolower($fname), 'deadline')) &&
 					is_numeric($fvalue)) ?
 					EasyContactFormsUtils::getDate($fvalue) :
 					$fvalue;
@@ -302,7 +270,7 @@ class EasyContactFormsBackOffice {
 	 * @param  $attachments
 	 * 
 	 */
-	function send($message, $emaillist, $sender, $email = '', $attachments) {
+	function send($message, $emaillist, $sender, $email = '', $attachments = array()) {
 
 		if ($email == '') {
 			$email = EasyContactFormsApplicationSettings::getInstance()->get('SendFrom');
@@ -334,88 +302,6 @@ class EasyContactFormsBackOffice {
 		global $easycontactforms_request;
 		$easycontactforms_request->attachment = $attachments;
 		wp_mail($emaillist, $message->subject, $message->body, $headers);
-
-	}
-
-	/**
-	 * 	processHistory
-	 *
-	 * 	performs status/comment/history processing
-	 *
-	 * @param array $fieldvalues
-	 * 	request field data
-	 * @param string $type
-	 * 	object type
-	 * @param int $oid
-	 * 	object id
-	 * @param int $uid
-	 * 	current user id
-	 */
-	function processHistory($fieldvalues, $type, $oid, $uid) {
-
-		$object = EasyContactFormsClassLoader::getObject($type, TRUE, $oid);
-
-		$is_st_changed = isset($fieldvalues->Status) &&
-			($fieldvalues->Status != $object->get('Status'));
-		$not_on_sn_chng_var = $type . '_NotifyOnStatusChange';
-
-		$not_on_st_change = EasyContactFormsApplicationSettings::getInstance()->get($not_on_sn_chng_var);
-
-		$is_n_comment = isset($fieldvalues->Comment) && !empty($fieldvalues->Comment);
-		$not_on_new_comment_var = $type . '_NotifyOnNewComment';
-		$not_on_new_comment = EasyContactFormsApplicationSettings::getInstance()->get($not_on_new_comment_var);
-
-		$send_message = ($is_n_comment && $not_on_new_comment ) ||
-			($is_st_changed && $not_on_st_change);
-
-		if (! $is_st_changed && ! $is_n_comment) {
-			return $fieldvalues;
-		}
-
-		$type_status_map = array();
-
-		$objname = EasyContactFormsDB::getTableName($type_status_map[$type]);
-
-		$status = '';
-		if (isset($objname)) {
-			$sid = $is_st_changed ?
-				intval($fieldvalues->Status) : $object->get('Status');
-			$status = EasyContactFormsDB::getValue("SELECT Description FROM $objname WHERE id='$sid'");
-			$status .= ' -- ';
-		}
-
-		$user = EasyContactFormsDB::getValue(
-				"SELECT CONCAT(Description,' ',Name) FROM #wp__easycontactforms_users WHERE id='$uid'");
-
-		$text = (object) array('body' => '', 'subject' => '');
-
-		$comment = '';
-		$delimeter = '-- ' . $user . ' -- ' . $status .
-			date(EasyContactFormsT::get('DateTimeFormat')) . ' --<br/>';
-
-		if ($is_n_comment) {
-			$comment = $fieldvalues->Comment;
-			unset($fieldvalues->Comment);
-			$text->body = $comment;
-			$stemplate = EasyContactFormsApplicationSettings::getInstance()->get('NewCommentSubject');
-			$text->subject = sprintf(
-				$stemplate,
-				$type, $object->get('Description'), $status);
-		}
-		if ($is_st_changed) {
-			$stemplate = EasyContactFormsApplicationSettings::getInstance()->get('StatusChangeSubject');
-			$text->subject = sprintf(
-				$stemplate,
-				$type, $object->get('Description'), $status);
-		}
-		$history = $delimeter . $text->body . '<br/>' . $object->get('History');
-		$fieldvalues->History = $history;
-
-		if ($send_message) {
-			$this->sendNotification($uid, $type, $oid, $text);
-		}
-
-		return $fieldvalues;
 
 	}
 

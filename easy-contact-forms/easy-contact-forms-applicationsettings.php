@@ -57,6 +57,9 @@ class EasyContactFormsApplicationSettings extends EasyContactFormsBase {
 				'DateTimeFormat' => '',
 				'InitTime' => 0,
 				'ShowPoweredBy' => 0,
+				'FixStatus02' => 0,
+				'w3cCompliant' => 0,
+				'w3cStyle' => '',
 			);
 
 		if ($objdata) {
@@ -86,6 +89,8 @@ class EasyContactFormsApplicationSettings extends EasyContactFormsBase {
 		$request = EasyContactFormsUtils::parseRequest($request, 'FixStatus0', 'boolean');
 		$request = EasyContactFormsUtils::parseRequest($request, 'InitTime', 'date');
 		$request = EasyContactFormsUtils::parseRequest($request, 'ShowPoweredBy', 'boolean');
+		$request = EasyContactFormsUtils::parseRequest($request, 'FixStatus02', 'boolean');
+		$request = EasyContactFormsUtils::parseRequest($request, 'w3cCompliant', 'boolean');
 
 		parent::update($request, $id);
 
@@ -176,6 +181,21 @@ class EasyContactFormsApplicationSettings extends EasyContactFormsBase {
 			$obj->getLinkMessage();
 		}
 		return $obj;
+
+	}
+
+	/**
+	 * 	getAvaliableFormStyles
+	 *
+	 *
+	 * @return
+	 * 
+	 */
+	function getAvaliableFormStyles() {
+
+		echo '<option value="">...</option>';
+		$forms = EasyContactFormsClassLoader::getObject('CustomForms');
+		echo $forms->basicGetAvaliableStyles($this->get('w3cStyle'));
 
 	}
 
@@ -385,9 +405,9 @@ class EasyContactFormsApplicationSettings extends EasyContactFormsBase {
 	 */
 	function setOptionValue($map) {
 
-		$name = addslashes($map['fld']);
-		$value = addslashes($map['a']);
-		$group = addslashes($map['undef']);
+		$name = mysql_real_escape_string($map['fld']);
+		$value = mysql_real_escape_string($map['a']);
+		$group = mysql_real_escape_string($map['undef']);
 		$this->setOption($group, $name, $value);
 
 	}
@@ -493,6 +513,12 @@ class EasyContactFormsApplicationSettings extends EasyContactFormsBase {
 
 		$obj->FixStatus0Checked = $obj->get('FixStatus0') ? 'checked' : '';
 		$obj->FixStatus0 = $obj->get('FixStatus0') ? 'on' : 'off';
+
+		$obj->FixStatus02Checked = $obj->get('FixStatus02') ? 'checked' : '';
+		$obj->FixStatus02 = $obj->get('FixStatus02') ? 'on' : 'off';
+
+		$obj->w3cCompliantChecked = $obj->get('w3cCompliant') ? 'checked' : '';
+		$obj->w3cCompliant = $obj->get('w3cCompliant') ? 'on' : 'off';
 
 		$obj->set('DefaultStyle', htmlspecialchars($obj->get('DefaultStyle'), ENT_QUOTES));
 		$obj->set('SendFrom', htmlspecialchars($obj->get('SendFrom'), ENT_QUOTES));

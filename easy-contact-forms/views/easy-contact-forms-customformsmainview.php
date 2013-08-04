@@ -79,28 +79,28 @@ EasyContactFormsLayout::getFormHeader2Body();
             <select id='<?php echo $obj->sId('id');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('general');?>
             </select>
-            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='id' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Description');?>'><?php echo EasyContactFormsT::get('Description');?></label>
             <select id='<?php echo $obj->sId('Description');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='Description' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='Description' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('NotificationSubject');?>'><?php echo EasyContactFormsT::get('NotificationSubjectF');?></label>
             <select id='<?php echo $obj->sId('NotificationSubject');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='NotificationSubject' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='NotificationSubject' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('ConfirmationSubject');?>'><?php echo EasyContactFormsT::get('ConfirmationSubject');?></label>
             <select id='<?php echo $obj->sId('ConfirmationSubject');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='ConfirmationSubject' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='ConfirmationSubject' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
         </div>
         <div>
@@ -109,14 +109,14 @@ EasyContactFormsLayout::getFormHeader2Body();
             <select id='<?php echo $obj->sId('ConfirmationText');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('string');?>
             </select>
-            <input type='text' id='ConfirmationText' class='textinput ufo-text ufo-filtervalue' style='width:130px'>
+            <input type='text' id='ConfirmationText' class='textinput ufo-text ufo-filtervalue' style='width:130px'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('Redirect');?>'><?php echo EasyContactFormsT::get('Redirect');?></label>
             <select id='<?php echo $obj->sId('Redirect');?>' class='ufo-select ufo-filtersign'>
               <?php echo $obj->sList('bool');?>
             </select>
-            <input type='checkbox' id='Redirect' value='off' class='ufo-cb checkbox ufo-filtervalue' onchange='this.value=(this.checked)?"on":"off"'>
+            <input type='checkbox' id='Redirect' value='off' class='ufo-cb checkbox ufo-filtervalue' onchange='this.value=(this.checked)?"on":"off";'/>
           </div>
           <div>
             <label for='<?php echo $obj->sId('ObjectOwner');?>'><?php echo EasyContactFormsT::get('PrimaryReceiverF');?></label>
@@ -134,7 +134,7 @@ EasyContactFormsLayout::getFormHeader2Body();
       <table class='vtable'>
         <tr>
           <th style='width:8px'>
-            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'>
+            <input type='checkbox' class='ufo-id-link' style='margin:0' onchange='ufo.checkAll(this)'/>
           </th>
           <th style='width:30px'>
             <?php EasyContactFormsIHTML::getColumnHeader(array('view' => $obj, 'field' => "id"));?>

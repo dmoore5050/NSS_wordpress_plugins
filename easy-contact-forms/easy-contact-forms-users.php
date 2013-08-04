@@ -20,7 +20,7 @@ require_once 'easy-contact-forms-baseclass.php';
  * 	EasyContactFormsUsers
  *
  */
-class EasyContactFormsUsers extends EasyContactFormsBase {
+class EasyContactFormsUsers extends EasyContactFormsBusinessObject {
 
 	/**
 	 * 	EasyContactFormsUsers class constructor
@@ -269,11 +269,6 @@ class EasyContactFormsUsers extends EasyContactFormsBase {
 		$request = EasyContactFormsUtils::parseRequest($request, 'Role', 'int');
 		$request = EasyContactFormsUtils::parseRequest($request, 'CMSId', 'int');
 
-		if (isset($this->user)) {
-			require_once 'easy-contact-forms-backoffice.php';
-			$bo = new EasyContactFormsBackOffice();
-			$request = $bo->processHistory($request, $this->type, $id, $this->user->id);
-		}
 		parent::update($request, $id);
 
 	}

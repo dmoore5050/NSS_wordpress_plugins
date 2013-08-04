@@ -139,9 +139,18 @@ class EasyContactFormsDB {
 
 		if (! is_null($filters) && isset($filters['fvalues'])){
 			foreach ($filters['fvalues'] as $key => $value){
-				$replacement = is_array($value) ?
-					"'" . implode("', '", $value) . "'" :
-					"'" . mysql_real_escape_string($value) . "'";
+				if (is_array($value)) {
+					if (!function_exists('ms_r_escape_s')) {
+						function ms_r_escape_s(&$item) {
+							$item = mysql_real_escape_string($item);
+						}
+					}
+					array_walk($value, 'ms_r_escape_s');
+					$replacement = "'" . implode("', '", $value) . "'";
+				}
+				else {
+					$replacement = "'" . mysql_real_escape_string($value) . "'";
+				}
 
 				$select = str_replace($key, $replacement, $select);
 			}
@@ -455,31 +464,6 @@ class EasyContactFormsDB {
 			$stdfilters[$filter->property] = $filter->value;
 		}
 		return $stdfilters;
-
-	}
-
-	/**
-	 * 	getStatusFilter
-	 *
-	 * 	sets a status filter, filtering out objects having the skip in
-	 * 	reporting flag set
-	 *
-	 * @param string $type
-	 * 	a name a type to set a status filter for
-	 *
-	 * @return object
-	 * 	the predefined filter object
-	 */
-	function getStatusFilter($type) {
-
-		$query = 'SELECT id FROM ' . EasyContactFormsDB::getTableName($type) .
-			' WHERE SkipInReporting = TRUE';
-		$result = EasyContactFormsDB::select($query);
-		$values = array(0);
-		foreach($result as $rec) {
-			$values[] = $rec->id;
-		}
-		return (object) (array('sign' => '12', 'values' => $values));
 
 	}
 

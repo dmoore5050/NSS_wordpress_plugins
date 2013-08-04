@@ -261,7 +261,6 @@ class EasyContactFormsBase {
 			}
 		}
 		EasyContactFormsDB::update($fldvalues, $this->type, $id);
-
 	}
 
 	/**
@@ -323,6 +322,40 @@ class EasyContactFormsBase {
 	function getTableName() {
 
 		return EasyContactFormsDB::getTableName($this->type);
+
+	}
+
+	/**
+	 * 	getByName
+	 *
+	 * 	Finds an object in the database by a given name
+	 *
+	 * @param string $name
+	 * 	Object name
+	 * @param boolean $new
+	 * 	whether to create a new object if it is not found
+	 *
+	 * @return object
+	 * 	returns a found or a newly crated object
+	 */
+	function getByName($name, $new = FALSE) {
+
+		$name = mysql_real_escape_string($name);
+		$tablename = $this->getTableName();
+		$query = "SELECT id FROM {$tablename} WHERE Description='{$name}'";
+		$objid = EasyContactFormsDB::getValue($query);
+		if (is_numeric($objid)) {
+			$obj = EasyContactFormsClassLoader::getObject($this->type, true, $objid);
+			return $obj;
+		}
+		if ($new) {
+			$obj = $this->getEmptyObject(array());
+			$obj->set('Description', $name);
+			$obj->save();
+			$obj->_new = TRUE;
+			return $obj;
+		}
+		return FALSE;
 
 	}
 
@@ -534,8 +567,9 @@ class EasyContactFormsBase {
 		}
 		$fmap = $this->getFieldNames();
 
-		$user = $map['easycontactusr'];
-		if (in_array('ObjectOwner', $fmap)) {
+		$user = isset($map['easycontactusr']) ? $map['easycontactusr'] : NULL;
+
+		if (in_array('ObjectOwner', $fmap) && !is_null($user)) {
 			$fields->ObjectOwner = $user->id;
 		}
 
@@ -544,18 +578,22 @@ class EasyContactFormsBase {
 			if (is_array($rvalues)) {
 				foreach ($rvalues as $value) {
 					$name = $value->fld;
+					$name = mysql_real_escape_string($name);
 					$fields->$name = $value->oid;
 				}
 			}
 			else {
 				$name = $rvalues->fld;
+				$name = mysql_real_escape_string($name);
 				$fields->$name = $rvalues->oid;
 			}
 		}
 
 		$classname = 'EasyContactForms' . $this->type;
 		$obj = new $classname(TRUE);
-		$obj->user = $user;
+		if (!is_null($user)) {
+			$obj->user = $user;
+		}
 
 		if (in_array('Description', $fmap) && !isset($fields->Description)) {
 			$fields->Description
@@ -565,7 +603,9 @@ class EasyContactFormsBase {
 		$obj->update($fields, $obj->getId());
 
 		$obj = new $classname(TRUE, $obj->getId());
-		$obj->user = $user;	
+		if (!is_null($user)) {
+			$obj->user = $user;
+		}
 		return $obj;
 
 	}
@@ -640,6 +680,27 @@ class EasyContactFormsBase {
 			return $this->fields->$prop;
 		}
 		return NULL;
+
+	}
+
+	/**
+	 * 	getValue
+	 *
+	 * 	Returns a field value of an object with given id
+	 *
+	 * @param string $fldName
+	 * 	field name
+	 * @param int $id
+	 * 	object id
+	 *
+	 * @return arbitrary
+	 * 	the value
+	 */
+	function getValue($fldName, $id) {
+
+		$tablename = $this->getTableName();
+		$id = intval($id);
+		return EasyContactFormsDB::getValue("SELECT $fldName FROM $tablename WHERE id='{$id}';");
 
 	}
 
@@ -887,7 +948,7 @@ class EasyContactFormsBase {
 
 		if (isset($map['specialfilter'])) {
 			$specialfilter = json_decode(stripslashes($map['specialfilter']));
-			if (is_array($specialfilter[0])) {
+			if (isset($specialfilter[0]) && is_object($specialfilter[0])) {
 				$config->a = (object) array();
 				$config->a->fld = $specialfilter[0]->property;
 				$config->a->oid = $specialfilter[0]->value->values[0];
@@ -1050,6 +1111,90 @@ class EasyContactFormsForms extends EasyContactFormsBase {
 		};
 		$method =	'get'.$this->type.'Form';
 		return	$this->$method($dispmap);
+
+	}
+
+}
+
+/**
+ * 	EasyContactFormsBusinessObject. extends the Base class. Adds tracking
+ * 	abilities
+ *
+ */
+class EasyContactFormsBusinessObject extends EasyContactFormsBase {
+
+	/**
+	 * 	update
+	 *
+	 * 	filters out the object data from a request and puts it to a database
+	 *
+	 * @param array $request
+	 * 	object data to put to a database
+	 * @param int $id
+	 * 	object id
+	 */
+	function update($request, $id) {
+
+		$request = (array) $request;
+
+		$newcomment = NULL;
+		if (isset($request['Comment']) && !empty($request['Comment'])) {
+			$newcomment = $request['Comment'];
+			unset($request['Comment']);
+			$history = $this->getValue('History', $id);
+			$fcomment = $this->formatComment($newcomment, $request);
+			$request['History'] = $fcomment . $history;
+		}
+		parent::update($request, $id);
+
+	}
+
+	/**
+	 * 	formatComment
+	 *
+	 * 	returns a formatted comment
+	 *
+	 * @param int $comment
+	 * 	old object status
+	 * @param array $request
+	 * 	request data
+	 *
+	 * @return string
+	 * 	the formatted comment
+	 */
+	function formatComment($comment, $request) {
+
+		$as = EasyContactFormsApplicationSettings::getInstance();
+		if (!$as->get('UseTinyMCE')) {
+			$comment = nl2br(htmlspecialchars($comment));
+		}
+
+		$lastname = '';
+		$name = '';
+		if (isset($this->user)){
+			$userid = $this->user->id;
+			$users = EasyContactFormsClassLoader::getObject('Users');
+			$lastname = $users->getValue('Description', $userid);
+			$name = $users->getValue('Name', $userid);
+			$this->_userName = trim("{$name} {$lastname}");
+		}
+		$date = date($as->getDateFormat('PHP', TRUE));
+
+		return "
+				<div class='ufo-div-comment'>
+					<div class='ufo-div-comment-header'>
+						{$name}&nbsp;{$lastname}
+						<br />
+						<span>
+							{$date}
+						</span>
+					</div>
+					<div class='ufo-div-comment-comment'>
+						{$comment}
+					</div>
+				</div>
+				<div class='ufo-clear-both'></div>
+				";
 
 	}
 

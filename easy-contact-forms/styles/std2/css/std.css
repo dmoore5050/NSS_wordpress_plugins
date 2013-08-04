@@ -789,3 +789,7 @@ div.ufo-as-hint{
 	z-index: 100;
 	margin: 0 3px
 }
+
+div.ufo-div-comment{font-size:12px;border-radius:10px;background:#f8f8f8;overflow:hidden;margin:10px;border:1px solid #ccc;padding-right:10px;}
+div.ufo-div-comment-header{background:#eee;padding:10px;;float:left;margin: 0 10px 0 0;border-radius:0 0 6px 0;}
+div.ufo-div-comment-comment{padding:10px;}
