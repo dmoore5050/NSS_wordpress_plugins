@@ -433,31 +433,35 @@ if( !class_exists('DonateExtra') ):
       $output = '<form id="donateextraform" target="_blank" style="float: left;" action="'.$verifyurlz[$dextra['testing_mode']].'" method="post">';
 
         $output .='<input type="hidden" id="cmd" name="cmd" value="_donations">
-      <p class="donate_amount"><label for="amount">'.__('Donation Amount', 'dextra').':</label><br /><input type="text" name="amount" id="amount" value="'.$dextra['default_value'].'" /> <small>('.__('Currency: ','dextra').$cur.')</small></p>';
+      <p class="donate_amount"><label for="amount" class="bold">'.__('Donation Amount', 'dextra').':</label><br /><input type="text" name="amount" id="amount" value="'.$dextra['default_value'].'" /> <small>('.__('Currency: ','dextra').$cur.')</small></p>';
 
 
       if( in_array('D',$dextra['subscribe']) || in_array('W',$dextra['subscribe']) || in_array('M',$dextra['subscribe']) || in_array('Y',$dextra['subscribe']) ):
         $output .= '
 <input type="hidden" name="a3" id="a3" value="" />
 <p class="donate_recur">
-  <label class="formLabel" for="recur">Donation should be repeated every</label>
-  <input name="p3" id="p3" value="'.$dextra['duration'].'" type="text" style="width: 20px;"/>
+  <label for="recur">Donation should be repeated </label>
   <select name="t3" id="t3">';
     if( in_array('1', $dextra['subscribe']))
-      $output .= '<option value="0">Do not repeat</option>';
+      $output .= '<option value="0">Never</option>';
     if( in_array('D', $dextra['subscribe']))
-      $output .= '<option value="D">Day(s)</option>';
+      $output .= '<option value="D">Daily</option>';
     if( in_array('W', $dextra['subscribe']))
-      $output .= '<option value="W">Week(s)</option>';
+      $output .= '<option value="W">Weekly</option>';
     if( in_array('M', $dextra['subscribe']))
-      $output .= '<option value="M">Month(s)</option>';
+      $output .= '<option value="M">Monthly</option>';
     if( in_array('Y', $dextra['subscribe']))
-      $output .= '<option value="Y">Year(s)</option>';
+      $output .= '<option value="Y">Yearly</option>';
     $output .= '</select>
   <br /><br />
-  <label class="formLabel">For</label>
+  <label class="bold">If donation is recurring:</label>
+  <br />
+  <label class="formaLabel">Donation should repeat every</label>
+  <input name="p3" id="p3" value="'.$dextra['duration'].'" type="text" style="width: 20px;"/>
+  <label>months for</label>
   <input type="hidden" name="src" id="src" value="'.$dplus['duration'].'">
-  <input name="srt" id="srt" value="'.$dplus['duration'].'" type="text" style="width:20px;" > months <small>(No end date will be set if this value is set to "0")</small>
+  <input name="srt" id="srt" value="'.$dplus['duration'].'" type="text" style="width:20px;" > months <br />
+  <small>(Donation will recur indefinitely if the last value is set to "0")</small>
   <input type="hidden" name="sra" value="1">
 </p>';
       endif;
@@ -470,15 +474,15 @@ $siteurl = get_option('siteurl');
       <h3 class="formTitle center">Donor Wall Message</h3>
       <p class="recognition_wall"><label><input type="checkbox" id="recognize" name="recognize" value="1" /> '.__('Put my Donation on the Recognition Wall','dextra').'</label></p>
       <div id="wallinfo">
-      <p class="show_onwall" id="wallops"><label class="formLabel" for="show_onwall" >'.__('Show on Wall', 'dextra').':</label><br /><select name="item_number"style="margin-left: 0px !important;">
+      <p class="show_onwall" id="wallops"><label class="bold" for="show_onwall" >'.__('Show on Wall', 'dextra').':</label><br /><select name="item_number"style="margin-left: 0px !important;">
         <option value="0:'.$user_ID.'">'.__('Do not show any information','dextra').'</option>
         <option value="1:'.$user_ID.'">'.__('Amount, User Details &amp; Comments','dextra').'</option>
         <option value="2:'.$user_ID.'">'.__('User Details &amp; Comments Only','dextra').'</option>
       </select></p>
-      <p class="donor_name"><label class="formLabel" for="donor_name">'.__('Name', 'dextra').':</label><br /><input type="text" name="on0" id="donor_name" /></p>
-      <p class="donor_email"><label class="formLabel" for="donor_email">'.__('Email', 'dextra').':</label><br /><input type="text" name="os0" id="donor_email" /></p>
-      <p class="donor_url"><label class="formLabel" for="donor_url">'.__('Website', 'dextra').':</label><br /><input type="text" name="on1" size="30" id="donor_url" /></p>
-      <p  class="donor_comment"><label class="formLabel" for="donor_comment">'.__('Comments', 'dextra').':</label><br /><textarea name="os1" id="donor_comment" rows="4" cols="45"></textarea><br /><span id="charinfo">'.__('Write your comment within 199 characters.','dextra').'</span> </p></div>';
+      <p class="donor_name"><label class="bold" for="donor_name">'.__('Name', 'dextra').':</label><br /><input type="text" name="on0" id="donor_name" /></p>
+      <p class="donor_email"><label class="bold" for="donor_email">'.__('Email', 'dextra').':</label><br /><input type="text" name="os0" id="donor_email" /></p>
+      <p class="donor_url"><label class="bold" for="donor_url">'.__('Website', 'dextra').':</label><br /><input type="text" name="on1" size="30" id="donor_url" /></p>
+      <p  class="donor_comment"><label class="bold" for="donor_comment">'.__('Comments', 'dextra').':</label><br /><textarea name="os1" id="donor_comment" rows="4" cols="45"></textarea><br /><span id="charinfo">'.__('Write your comment within 199 characters.','dextra').'</span> </p></div>';
       endif;
 
       $output .= '
