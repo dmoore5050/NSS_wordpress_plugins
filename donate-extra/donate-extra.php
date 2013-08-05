@@ -458,7 +458,7 @@ if( !class_exists('DonateExtra') ):
   <br />
   <label class="formaLabel">Donation should repeat every</label>
   <input name="p3" id="p3" value="'.$dextra['duration'].'" type="text" style="width: 20px;"/>
-  <label>months for</label>
+  <label>month(s) for</label>
   <input type="hidden" name="src" id="src" value="'.$dplus['duration'].'">
   <input name="srt" id="srt" value="'.$dplus['duration'].'" type="text" style="width:20px;" > months
   <br />
@@ -491,12 +491,13 @@ $siteurl = get_option('siteurl');
         </p>
         <p class="donor_name">
           <label class="bold" for="donor_name">'.__('Name', 'dextra').':</label>
-          <br /><input type="text" name="on0" id="donor_name" />
+          <br />
+          <input type="text" name="on0" size="30" id="donor_name" />
         </p>
         <p class="donor_email">
           <label class="bold" for="donor_email">'.__('Email', 'dextra').':</label>
           <br />
-          <input type="text" name="os0" id="donor_email" />
+          <input type="text" name="os0" size="30" id="donor_email" />
         </p>
         <p class="donor_url">
           <label class="bold" for="donor_url">'.__('Website', 'dextra').':</label>
@@ -506,7 +507,7 @@ $siteurl = get_option('siteurl');
         <p class="donor_comment">
           <label class="bold" for="donor_comment">'.__('Comments', 'dextra').':</label>
           <br />
-          <textarea name="os1" id="donor_comment" rows="4" cols="45" placeholder="Maximum comment length is 199 characters."></textarea>
+          <textarea name="os1" id="donor_comment" rows="4" cols="56" placeholder="Maximum comment length is 199 characters."></textarea>
         </p>
       </div>';
       endif;
@@ -525,8 +526,10 @@ $siteurl = get_option('siteurl');
   <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
 </div>
 
-<p class="submit center"><input type="image" src="'.$button.'" style="background-color: transparent;" border="0" name="submit" alt="">
-<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"></p>
+<p class="submit center">
+  <input type="image" id="formSubmit"src="'.$button.'" style="background-color: transparent;" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</p>
 </form>';
       endif;
       return $output;
