@@ -460,7 +460,8 @@ if( !class_exists('DonateExtra') ):
   <input name="p3" id="p3" value="'.$dextra['duration'].'" type="text" style="width: 20px;"/>
   <label>months for</label>
   <input type="hidden" name="src" id="src" value="'.$dplus['duration'].'">
-  <input name="srt" id="srt" value="'.$dplus['duration'].'" type="text" style="width:20px;" > months <br />
+  <input name="srt" id="srt" value="'.$dplus['duration'].'" type="text" style="width:20px;" > months
+  <br />
   <small>(Donation will recur indefinitely if the last value is set to "0")</small>
   <input type="hidden" name="sra" value="1">
 </p>';
@@ -472,17 +473,42 @@ $siteurl = get_option('siteurl');
       if( $dextra['enable_wall'] == 1 ):
         $output .= '
       <h3 class="formTitle center">Donor Wall Message</h3>
-      <p class="recognition_wall"><label><input type="checkbox" id="recognize" name="recognize" value="1" /> '.__('Put my Donation on the Recognition Wall','dextra').'</label></p>
+      <p class="recognition_wall">
+        <label>
+          <input type="checkbox" id="recognize" name="recognize" value="1" />
+          '.__('Put my Donation on the Recognition Wall','dextra').'
+        </label>
+      </p>
       <div id="wallinfo">
-      <p class="show_onwall" id="wallops"><label class="bold" for="show_onwall" >'.__('Show on Wall', 'dextra').':</label><br /><select name="item_number"style="margin-left: 0px !important;">
-        <option value="0:'.$user_ID.'">'.__('Do not show any information','dextra').'</option>
-        <option value="1:'.$user_ID.'">'.__('Amount, User Details &amp; Comments','dextra').'</option>
-        <option value="2:'.$user_ID.'">'.__('User Details &amp; Comments Only','dextra').'</option>
-      </select></p>
-      <p class="donor_name"><label class="bold" for="donor_name">'.__('Name', 'dextra').':</label><br /><input type="text" name="on0" id="donor_name" /></p>
-      <p class="donor_email"><label class="bold" for="donor_email">'.__('Email', 'dextra').':</label><br /><input type="text" name="os0" id="donor_email" /></p>
-      <p class="donor_url"><label class="bold" for="donor_url">'.__('Website', 'dextra').':</label><br /><input type="text" name="on1" size="30" id="donor_url" /></p>
-      <p  class="donor_comment"><label class="bold" for="donor_comment">'.__('Comments', 'dextra').':</label><br /><textarea name="os1" id="donor_comment" rows="4" cols="45"></textarea><br /><span id="charinfo">'.__('Write your comment within 199 characters.','dextra').'</span> </p></div>';
+        <p class="show_onwall" id="wallops">
+          <label class="bold" for="show_onwall" >'.__('Show on Wall', 'dextra').':</label>
+          <br />
+          <select name="item_number"style="margin-left: 0px !important;">
+            <option value="0:'.$user_ID.'">'.__('Do not show any information','dextra').'</option>
+            <option value="1:'.$user_ID.'">'.__('Amount, User Details &amp; Comments','dextra').'</option>
+            <option value="2:'.$user_ID.'">'.__('User Details &amp; Comments Only','dextra').'</option>
+          </select>
+        </p>
+        <p class="donor_name">
+          <label class="bold" for="donor_name">'.__('Name', 'dextra').':</label>
+          <br /><input type="text" name="on0" id="donor_name" />
+        </p>
+        <p class="donor_email">
+          <label class="bold" for="donor_email">'.__('Email', 'dextra').':</label>
+          <br />
+          <input type="text" name="os0" id="donor_email" />
+        </p>
+        <p class="donor_url">
+          <label class="bold" for="donor_url">'.__('Website', 'dextra').':</label>
+          <br />
+          <input type="text" name="on1" size="30" id="donor_url" />
+        </p>
+        <p class="donor_comment">
+          <label class="bold" for="donor_comment">'.__('Comments', 'dextra').':</label>
+          <br />
+          <textarea name="os1" id="donor_comment" rows="4" cols="45" placeholder="Maximum comment length is 199 characters."></textarea>
+        </p>
+      </div>';
       endif;
 
       $output .= '
