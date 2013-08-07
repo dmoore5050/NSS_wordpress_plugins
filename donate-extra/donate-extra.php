@@ -527,8 +527,7 @@ $siteurl = get_option('siteurl');
 </div>
 
 <p class="submit center">
-  <input type="image" id="formSubmit"src="'.$button.'" style="background-color: transparent;" border="0" name="submit" alt="">
-  <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+  <button class="button orange" id="formSubmit" name="submit" alt="">Donate</button>
 </p>
 </form>';
       endif;
