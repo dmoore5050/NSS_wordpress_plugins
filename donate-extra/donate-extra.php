@@ -514,11 +514,7 @@ $siteurl = get_option('siteurl');
 </div>
 
 <p class="submit center">
-<<<<<<< HEAD
   <button class="orange button" id="formSubmit" name="submit" alt="">Donate</button>
-=======
-  <button class="button orange" id="formSubmit" name="submit" alt="">Donate</button>
->>>>>>> 0796d55266d03299ba152eb33ea90d2cf398f6dc
 </p>
 </form>';
       endif;
