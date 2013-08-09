@@ -269,16 +269,6 @@ if( !class_exists('DonateExtra') ):
                       <td><input type="text" name="default_value" id="default_value" value="<?php echo stripslashes($dextra['default_value']);?>" /></td>
                     </tr>
                     <tr valign="top">
-                      <th scope="row"><label for="button_img"><?php _e('Button Image', 'dextra');?></label></th>
-                      <td>
-                        <label><input type="radio" name="button_img" id="button_img" value="1" <?php if($dextra['button_img'] == 1) echo 'checked="checked"';?> /> <img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" /></label>
-                        <label><input type="radio" name="button_img" value="2" <?php if($dextra['button_img'] == 2) echo 'checked="checked"';?> /> <img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" /></label>
-                        <label><input type="radio" name="button_img" value="3" <?php if($dextra['button_img'] == 3) echo 'checked="checked"';?> /> <img src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" /></label>
-                        <br />
-                        <label><input type="radio" name="button_img" value="4" <?php if($dextra['button_img'] == 4) echo 'checked="checked"';?> /> <?php _e('Custom Image URL','dextra');?></label> <input type="text" name="custom_button" id="custom_button" value="<?php echo stripslashes($dextra['custom_button']);?>" />
-                      </td>
-                    </tr>
-                    <tr valign="top">
                       <th scope="row"><label for="subscribe"><?php _e('Enable Recurring Donations', 'dextra');?></label></th>
                       <td>
                         <?php echo $this->RecurringArray($dextra['subscribe'], 'subscribe');?>
@@ -419,8 +409,8 @@ if( !class_exists('DonateExtra') ):
       $cur = $dextra['paypal_currency'];
       $symbol = $currency[$dextra['paypal_currency']]['symbol'];
       $notify = $notify = get_option('siteurl') . '/wp-content/plugins/donate-extra/paypal.php';
-      $img_urlz = array( '1'=>'https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif', '2'=>'https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif', '3'=>'https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif', '4'=>$dextra['custom_button']);
-      $button = $img_urlz[$dextra['button_img']];
+      // $img_urlz = array( '1'=>'https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif', '2'=>'https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif', '3'=>'https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif', '4'=>$dextra['custom_button']);
+      // $button = $img_urlz[$dextra['button_img']];
       if( $dextra['wall_url'] == 'sidebar') $wall = get_option('siteurl');
       else $wall = get_permalink($dextra['wall_url']);
       if( strpos($wall, '?') === false )
@@ -468,7 +458,6 @@ if( !class_exists('DonateExtra') ):
       endif;
 
 $siteurl = get_option('siteurl');
-
 
       if( $dextra['enable_wall'] == 1 ):
         $output .= '
@@ -527,14 +516,12 @@ $siteurl = get_option('siteurl');
 </div>
 
 <p class="submit center">
-  <input type="image" id="formSubmit"src="'.$button.'" style="background-color: transparent;" border="0" name="submit" alt="">
-  <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+  <button class="orange button" id="formSubmit" name="submit" alt="">Donate</button>
 </p>
 </form>';
       endif;
       return $output;
     }
-
 
     function TextLimitJS(){
       global $currency, $user_ID;
