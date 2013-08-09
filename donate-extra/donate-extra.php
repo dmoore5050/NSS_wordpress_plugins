@@ -409,8 +409,6 @@ if( !class_exists('DonateExtra') ):
       $cur = $dextra['paypal_currency'];
       $symbol = $currency[$dextra['paypal_currency']]['symbol'];
       $notify = $notify = get_option('siteurl') . '/wp-content/plugins/donate-extra/paypal.php';
-      // $img_urlz = array( '1'=>'https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif', '2'=>'https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif', '3'=>'https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif', '4'=>$dextra['custom_button']);
-      // $button = $img_urlz[$dextra['button_img']];
       if( $dextra['wall_url'] == 'sidebar') $wall = get_option('siteurl');
       else $wall = get_permalink($dextra['wall_url']);
       if( strpos($wall, '?') === false )
@@ -516,7 +514,11 @@ $siteurl = get_option('siteurl');
 </div>
 
 <p class="submit center">
+<<<<<<< HEAD
   <button class="orange button" id="formSubmit" name="submit" alt="">Donate</button>
+=======
+  <button class="button orange" id="formSubmit" name="submit" alt="">Donate</button>
+>>>>>>> 0796d55266d03299ba152eb33ea90d2cf398f6dc
 </p>
 </form>';
       endif;
