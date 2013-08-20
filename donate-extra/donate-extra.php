@@ -104,7 +104,7 @@ if( !class_exists('DonateExtra') ):
       $default = array(
                 'paypal_email'      => get_option('admin_email'),
                 'paypal_currency'   => 'USD',
-                'testing_mode'      => 1,
+                'testing_mode'      => 2,
                 'paypal_percentage' => 3.4,
                 'paypal_cash'       => 0.20,
                 'donate_desc'       => 'Donation to '.get_option('blogname'),
@@ -323,7 +323,7 @@ if( !class_exists('DonateExtra') ):
               </form>
               <h2><?php _e('Shortcodes', 'dextra');?></h2>
                 <p><code>[donateextra]</code><br /><?php _e('This shortcode will display the Donate Extra donation form', 'dextra'); ?></p>
-                <p><code>[donorwall]</code><br /><?php _e('This shortcode will display the Donor Recognition Wall. <em>Optional attribute:</em> <code>title</code> is wrapped within a <code>&lt;h2&gt;</code> tag.  Usage is <code>[donorwall title=\'Donor Recognition Wall\']', 'dextra'); ?></p>
+                <p><code>[donorwall]</code><br /><?php _e('This shortcode will display the Donor Recognition Wall. <em>Optional attribute:</em> <code>title</code> is wrapped within a <code>&lt;h2&gt;</code> tag.  Usage is <code>[donorwall title="Donor Recognition Wall"]', 'dextra'); ?></p>
                 <p><code>[donatetotal]</code><br /><?php _e('This shortcode will display the dollar amount of total donations received. <em>Optional attributes:</em> <code>prefix</code> is the currency symbol (ie. $), <code>suffix</code> is the currency code (ie. USD), <code>type</code> is the english description (ie. U.S. Dollar). Usage is <code>[donatetotal prefix=\'1\' suffix=\'1\' type=\'0\']</code>. 1 will show, 0 will hide.', 'dextra'); ?></p>
                 <p><code>[donornumber]</code><br /><?php _e('This shortcode will display the number of donations received.'); ?></p>
                 <h2><?php _e('Instant Payment Notification URL', 'dextra');?></h2>
@@ -363,7 +363,7 @@ if( !class_exists('DonateExtra') ):
     function DonorNumber($atts=false) {
       global $wpdb;
       $table = $wpdb->prefix . 'donations';
-      $donors = $wpdb->get_results("SELECT amount FROM $table WHERE status='Completed'");
+      $donors = $wpdb->get_results("SELECT amount FROM $table WHERE status='Completed' AND txn_id<>'' ");
       $donorcount = count($donors);
       $output .= ' '.$donorcount;
       return $output;
@@ -378,7 +378,7 @@ if( !class_exists('DonateExtra') ):
         $limit = "ORDER BY ID DESC, display ASC, amount DESC, name ASC LIMIT ".$dextra['wall_max'];
       else
         $limit = "ORDER BY display ASC, amount DESC, name ASC";
-      $donors = $wpdb->get_results("SELECT * FROM $table WHERE status='Completed' AND display!=0 $limit");
+      $donors = $wpdb->get_results("SELECT * FROM $table WHERE status='Completed' AND display!=0 AND txn_id<>'' $limit");
       //print_r($donors);
       $output .= '<div id="donorwall">';
       if( $donors && $title )
@@ -582,7 +582,7 @@ jQuery(function(){
   var WallOps2 = '<?php echo '<p class="show_onwall" id="wallops"><label for="show_onwall">'.__('Show on Wall', 'dextra').':</label><br /><select name="item_number" style="margin-left: 0px !important;"><option value="1:'.$user_ID.'">'.__('Amount, User Details &amp; Comments','dextra').'</option><option value="2:'.$user_ID.'">'.__('User Details &amp; Comments Only','dextra').'</option></select></p>';?>';
 
   if( jQuery('#recognize').is(':checked') == false){
-    jQuery('#wallinfo').hide();
+    jQuery('#wallinfo').toggleClass('hidden');
     jQuery("#wallops").html(WallOps1);
   }
 
